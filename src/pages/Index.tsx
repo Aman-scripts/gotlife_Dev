@@ -37,11 +37,11 @@ const Index = () => {
           className="py-16 md:py-24 text-center"
         >
           <div className="container">
-            <h1 className="heading-editorial mb-4">All Collections</h1>
+            <h1 className="heading-editorial mb-4">The Collection</h1>
             <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Discover our curated collection of handcrafted pieces that
-              celebrate the art of Indian craftsmanship with a contemporary
-              sensibility.
+              Discover our curated collection of artisanal fragrances. 
+              Each scent is a journey — crafted with rare ingredients 
+              and timeless elegance.
             </p>
           </div>
         </motion.section>
@@ -61,7 +61,7 @@ const Index = () => {
 
               {/* Product Count */}
               <span className="text-xs text-muted-foreground hidden md:block">
-                {products.length} Products
+                {products.length} Fragrances
               </span>
 
               {/* Sort Dropdown */}
@@ -113,7 +113,7 @@ const Index = () => {
 
         {/* Load More */}
         <section className="pb-16 md:pb-24 text-center">
-          <button className="btn-outline">View All Products</button>
+          <button className="btn-outline">View All Fragrances</button>
         </section>
       </main>
 

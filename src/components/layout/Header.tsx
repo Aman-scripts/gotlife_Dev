@@ -4,7 +4,7 @@ import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { name: "Collections", href: "/collections" },
+  { name: "Fragrances", href: "/" },
   { name: "New", href: "/new" },
   { name: "Bestsellers", href: "/bestsellers" },
   { name: "About", href: "/about" },

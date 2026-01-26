@@ -1,11 +1,11 @@
-import product1 from "@/assets/products/product-1.jpg";
-import product2 from "@/assets/products/product-2.jpg";
-import product3 from "@/assets/products/product-3.jpg";
-import product4 from "@/assets/products/product-4.jpg";
-import product5 from "@/assets/products/product-5.jpg";
-import product6 from "@/assets/products/product-6.jpg";
-import product7 from "@/assets/products/product-7.jpg";
-import product8 from "@/assets/products/product-8.jpg";
+import perfume1 from "@/assets/products/perfume-1.jpg";
+import perfume2 from "@/assets/products/perfume-2.jpg";
+import perfume3 from "@/assets/products/perfume-3.jpg";
+import perfume4 from "@/assets/products/perfume-4.jpg";
+import perfume5 from "@/assets/products/perfume-5.jpg";
+import perfume6 from "@/assets/products/perfume-6.jpg";
+import perfume7 from "@/assets/products/perfume-7.jpg";
+import perfume8 from "@/assets/products/perfume-8.jpg";
 
 export interface Product {
   id: string;
@@ -14,77 +14,140 @@ export interface Product {
   image: string;
   tag?: "new" | "sold-out";
   category: string;
-  description?: string;
+  description: string;
+  notes: {
+    top: string[];
+    heart: string[];
+    base: string[];
+  };
+  size: string;
+  concentration: string;
 }
 
 export const products: Product[] = [
   {
     id: "1",
-    name: "The Ivory Silk Saree",
-    price: 42500,
-    image: product1,
+    name: "Amber Elixir",
+    price: 12500,
+    image: perfume1,
     tag: "new",
-    category: "sarees",
-    description: "Handwoven silk saree with delicate gold zari work",
+    category: "oriental",
+    description: "A luxurious amber fragrance with golden warmth. This opulent scent opens with sparkling citrus before revealing a heart of precious amber, enriched by vanilla and sandalwood.",
+    notes: {
+      top: ["Bergamot", "Pink Pepper", "Saffron"],
+      heart: ["Amber", "Jasmine", "Rose"],
+      base: ["Sandalwood", "Vanilla", "Musk"],
+    },
+    size: "100ml",
+    concentration: "Eau de Parfum",
   },
   {
     id: "2",
-    name: "The Noir Kurta Set",
-    price: 18500,
-    image: product2,
-    category: "kurta-sets",
-    description: "Contemporary black kurta with hand-embroidered details",
+    name: "Noir Absolute",
+    price: 15500,
+    image: perfume2,
+    category: "woody",
+    description: "A bold and mysterious fragrance for the modern connoisseur. Dark, sensual, and utterly captivating with notes of oud and leather wrapped in smoky incense.",
+    notes: {
+      top: ["Black Pepper", "Cardamom", "Bergamot"],
+      heart: ["Oud", "Leather", "Incense"],
+      base: ["Vetiver", "Amber", "Musk"],
+    },
+    size: "100ml",
+    concentration: "Extrait de Parfum",
   },
   {
     id: "3",
-    name: "The Beige Linen Co-ord",
-    price: 14500,
-    image: product3,
+    name: "Rose Pétale",
+    price: 9500,
+    image: perfume3,
     tag: "new",
-    category: "co-ords",
-    description: "Relaxed linen palazzo set in natural beige",
+    category: "floral",
+    description: "A romantic ode to the queen of flowers. Fresh Bulgarian roses dance with dewy petals and a whisper of peony, creating an enchanting feminine signature.",
+    notes: {
+      top: ["Pink Pepper", "Lychee", "Bergamot"],
+      heart: ["Bulgarian Rose", "Peony", "Magnolia"],
+      base: ["White Musk", "Cedar", "Ambrette"],
+    },
+    size: "75ml",
+    concentration: "Eau de Parfum",
   },
   {
     id: "4",
-    name: "The Olive Anarkali",
-    price: 32500,
-    image: product4,
-    category: "anarkalis",
-    description: "Silk anarkali with subtle embroidery in olive green",
+    name: "Blanc Absolu",
+    price: 18500,
+    image: perfume4,
+    category: "fresh",
+    description: "Minimalist luxury in a bottle. A clean, sophisticated scent that celebrates purity with crisp white flowers, soft musks, and a subtle woody dry-down.",
+    notes: {
+      top: ["Aldehydes", "Green Apple", "Bergamot"],
+      heart: ["White Flowers", "Iris", "Lily of the Valley"],
+      base: ["White Musk", "Cashmere Wood", "Ambergris"],
+    },
+    size: "100ml",
+    concentration: "Eau de Parfum",
   },
   {
     id: "5",
-    name: "The Rose Chanderi Kurta",
-    price: 16500,
-    image: product5,
-    category: "kurtas",
-    description: "Chanderi silk kurta with delicate gold work",
+    name: "Oud Royale",
+    price: 28500,
+    image: perfume5,
+    category: "oriental",
+    description: "The essence of Arabian luxury. Rare oud wood meets precious saffron and Bulgarian rose in this opulent, long-lasting fragrance fit for royalty.",
+    notes: {
+      top: ["Saffron", "Cinnamon", "Cardamom"],
+      heart: ["Oud", "Bulgarian Rose", "Orris"],
+      base: ["Amber", "Sandalwood", "Musk"],
+    },
+    size: "50ml",
+    concentration: "Parfum",
   },
   {
     id: "6",
-    name: "The Ivory Lehenga Set",
-    price: 85000,
-    image: product6,
+    name: "Citrus Verbena",
+    price: 7500,
+    image: perfume6,
     tag: "sold-out",
-    category: "lehengas",
-    description: "Bridal lehenga with intricate hand embroidery",
+    category: "fresh",
+    description: "A vibrant burst of Mediterranean sunshine. Zesty Italian lemons and fresh verbena create an invigorating scent that captures summer in a bottle.",
+    notes: {
+      top: ["Lemon", "Lime", "Grapefruit"],
+      heart: ["Verbena", "Green Tea", "Basil"],
+      base: ["White Cedar", "Musk", "Vetiver"],
+    },
+    size: "100ml",
+    concentration: "Eau de Toilette",
   },
   {
     id: "7",
-    name: "The Grey Block Print Set",
-    price: 12500,
-    image: product7,
+    name: "Velvet Orchid",
+    price: 14500,
+    image: perfume7,
     tag: "new",
-    category: "co-ords",
-    description: "Contemporary co-ord with traditional block printing",
+    category: "floral",
+    description: "A seductive evening fragrance with mysterious depth. Dark orchid blooms unfold against a backdrop of velvet plum and intoxicating ylang-ylang.",
+    notes: {
+      top: ["Plum", "Rum", "Bergamot"],
+      heart: ["Black Orchid", "Ylang-Ylang", "Jasmine"],
+      base: ["Dark Chocolate", "Patchouli", "Vanilla"],
+    },
+    size: "75ml",
+    concentration: "Eau de Parfum",
   },
   {
     id: "8",
-    name: "The Burgundy Velvet Jacket",
-    price: 28500,
-    image: product8,
-    category: "jackets",
-    description: "Luxurious velvet jacket with sherwani-inspired details",
+    name: "Aqua Marine",
+    price: 8500,
+    image: perfume8,
+    category: "fresh",
+    description: "The essence of ocean breeze and coastal freshness. Cool aquatic notes blend with sea salt and driftwood for an effortlessly clean signature.",
+    notes: {
+      top: ["Sea Salt", "Bergamot", "Grapefruit"],
+      heart: ["Marine Accord", "Lotus", "Water Lily"],
+      base: ["Driftwood", "White Musk", "Ambergris"],
+    },
+    size: "100ml",
+    concentration: "Eau de Toilette",
   },
 ];
 
@@ -93,11 +156,10 @@ export const filterOptions = [
     title: "Category",
     options: [
       { label: "All", value: "all" },
-      { label: "Sarees", value: "sarees" },
-      { label: "Kurta Sets", value: "kurta-sets" },
-      { label: "Co-ords", value: "co-ords" },
-      { label: "Anarkalis", value: "anarkalis" },
-      { label: "Lehengas", value: "lehengas" },
+      { label: "Oriental", value: "oriental" },
+      { label: "Woody", value: "woody" },
+      { label: "Floral", value: "floral" },
+      { label: "Fresh", value: "fresh" },
     ],
   },
   {
@@ -109,10 +171,16 @@ export const filterOptions = [
     ],
   },
   {
-    title: "Availability",
+    title: "Concentration",
     options: [
-      { label: "In Stock", value: "in-stock" },
-      { label: "Include Sold Out", value: "all" },
+      { label: "All", value: "all" },
+      { label: "Parfum", value: "parfum" },
+      { label: "Eau de Parfum", value: "edp" },
+      { label: "Eau de Toilette", value: "edt" },
     ],
   },
 ];
+
+export const getProductById = (id: string): Product | undefined => {
+  return products.find((product) => product.id === id);
+};
