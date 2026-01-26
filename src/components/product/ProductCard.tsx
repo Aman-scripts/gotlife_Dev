@@ -53,11 +53,11 @@ export const ProductCard = ({
           )}
 
           {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500" />
         </div>
 
         <div className="text-center space-y-2">
-          <h3 className="font-serif text-base md:text-lg tracking-wide group-hover:opacity-70 transition-opacity duration-300">
+          <h3 className="font-serif text-base md:text-lg tracking-wide transition-opacity duration-300">
             {name}
           </h3>
           <p className="text-sm text-muted-foreground">
