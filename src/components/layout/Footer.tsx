@@ -24,9 +24,9 @@ export const Footer = () => {
               House of EM5
             </Link>
             <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              A contemporary Indian fashion house crafting timeless pieces that
-              blend traditional artistry with modern sensibilities. Each creation
-              is a testament to heritage, designed for the discerning woman.
+              A contemporary fragrance house crafting timeless scents that
+              blend artistry with modern sensibilities. Each creation
+              is a testament to the art of perfumery, designed for the discerning nose.
             </p>
             <a
               href="https://instagram.com/house_of_em5"
@@ -47,7 +47,7 @@ export const Footer = () => {
               Quick Links
             </h4>
             <nav className="flex flex-col space-y-4">
-              {["Collections", "New Arrivals", "Bestsellers", "About Us"].map(
+              {["All Fragrances", "New Arrivals", "Bestsellers", "About Us"].map(
                 (link) => (
                   <Link
                     key={link}
@@ -67,7 +67,7 @@ export const Footer = () => {
               Support
             </h4>
             <nav className="flex flex-col space-y-4">
-              {["Shipping", "Returns", "Size Guide", "Contact"].map((link) => (
+              {["Shipping", "Returns", "Fragrance Guide", "Contact"].map((link) => (
                 <Link
                   key={link}
                   to={`/${link.toLowerCase().replace(" ", "-")}`}
@@ -85,7 +85,7 @@ export const Footer = () => {
               Newsletter
             </h4>
             <p className="text-sm text-muted-foreground mb-4">
-              Subscribe for exclusive updates
+              Subscribe for exclusive scent launches
             </p>
             <form onSubmit={handleSubmit} className="relative">
               <input
