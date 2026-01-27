@@ -17,6 +17,7 @@ interface FilterDrawerProps {
   filters: FilterSection[];
   activeFilters: Record<string, string[]>;
   onFilterChange: (section: string, value: string) => void;
+  onClearFilters?: () => void;
 }
 
 export const FilterDrawer = ({
@@ -25,7 +26,12 @@ export const FilterDrawer = ({
   filters,
   activeFilters,
   onFilterChange,
+  onClearFilters,
 }: FilterDrawerProps) => {
+  const handleClearAll = () => {
+    onClearFilters?.();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -78,13 +84,18 @@ export const FilterDrawer = ({
                           onClick={() =>
                             onFilterChange(section.title, option.value)
                           }
-                          className={`block w-full text-left text-sm transition-colors duration-300 ${
-                            isActive
-                              ? "text-foreground"
+                          className={`block w-full text-left text-sm transition-colors duration-300 ${isActive
+                              ? "text-foreground font-medium"
                               : "text-muted-foreground hover:text-foreground"
-                          }`}
+                            }`}
                         >
-                          {option.label}
+                          <span className="flex items-center">
+                            <span className={`w-4 h-4 border mr-3 flex items-center justify-center ${isActive ? "border-foreground bg-foreground" : "border-muted-foreground"
+                              }`}>
+                              {isActive && <span className="text-background text-xs">✓</span>}
+                            </span>
+                            {option.label}
+                          </span>
                         </button>
                       );
                     })}
@@ -95,9 +106,7 @@ export const FilterDrawer = ({
 
             <div className="p-6 border-t border-border flex space-x-4">
               <button
-                onClick={() => {
-                  // Clear all filters logic would go here
-                }}
+                onClick={handleClearAll}
                 className="flex-1 btn-outline"
               >
                 Clear All
@@ -112,3 +121,4 @@ export const FilterDrawer = ({
     </AnimatePresence>
   );
 };
+

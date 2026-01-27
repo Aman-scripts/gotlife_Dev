@@ -13,7 +13,7 @@ export const Footer = () => {
 
   return (
     <footer className="bg-background border-t border-border">
-      <div className="container mx-auto py-16 md:py-24">
+      <div className="container mx-auto py-10 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           {/* Brand Section */}
           <div className="md:col-span-5">
@@ -21,7 +21,7 @@ export const Footer = () => {
               to="/"
               className="font-serif text-2xl tracking-[0.15em] uppercase"
             >
-              House of EM5
+              GotLife
             </Link>
             <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
               A contemporary fragrance house crafting timeless scents that
@@ -29,14 +29,14 @@ export const Footer = () => {
               is a testament to the art of perfumery, designed for the discerning nose.
             </p>
             <a
-              href="https://instagram.com/house_of_em5"
+              href="https://instagram.com/gotlife"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               <Instagram className="h-4 w-4" />
               <span className="uppercase tracking-[0.15em] text-xs">
-                @house_of_em5
+                @gotlife
               </span>
             </a>
           </div>
@@ -107,8 +107,8 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between text-xs text-muted-foreground">
-          <p>© 2024 House of EM5. All rights reserved.</p>
+        <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between text-xs text-muted-foreground">
+          <p>© 2024 GotLife. All rights reserved.</p>
           <div className="flex items-center space-x-6 mt-4 md:mt-0">
             <Link
               to="/privacy"

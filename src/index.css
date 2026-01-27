@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* House of EM5 Luxury Fashion Design System */
+/* GotLife Luxury Perfume Design System */
 
 @layer base {
   :root {
@@ -12,40 +12,40 @@
     --background: 0 0% 100%;
     --background-subtle: 0 0% 98%;
     --foreground: 0 0% 7%;
-    
+
     --card: 0 0% 100%;
     --card-foreground: 0 0% 7%;
-    
+
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 7%;
-    
+
     /* Primary - Near Black */
     --primary: 0 0% 7%;
     --primary-foreground: 0 0% 100%;
-    
+
     /* Secondary - Warm Gray */
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 7%;
-    
+
     /* Muted - Soft Gray */
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 42%;
-    
+
     /* Accent - Muted Gold */
     --accent: 38 35% 85%;
     --accent-foreground: 0 0% 7%;
     --accent-gold: 38 50% 55%;
-    
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    
+
     /* Borders - Subtle */
     --border: 0 0% 90%;
     --input: 0 0% 90%;
     --ring: 0 0% 7%;
-    
+
     --radius: 0px;
-    
+
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 7%;
@@ -61,33 +61,33 @@
     --background: 0 0% 4%;
     --background-subtle: 0 0% 7%;
     --foreground: 0 0% 98%;
-    
+
     --card: 0 0% 7%;
     --card-foreground: 0 0% 98%;
-    
+
     --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
-    
+
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 7%;
-    
+
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
-    
+
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
-    
+
     --accent: 38 25% 20%;
     --accent-foreground: 0 0% 98%;
     --accent-gold: 38 50% 55%;
-    
+
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
-    
+
     --border: 0 0% 15%;
     --input: 0 0% 15%;
     --ring: 0 0% 85%;
-    
+
     --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 0 0% 98%;
@@ -103,15 +103,20 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     letter-spacing: 0.01em;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     letter-spacing: 0.02em;
@@ -119,82 +124,84 @@
 }
 
 @layer components {
+
   /* Navigation Link Style */
   .nav-link {
     @apply text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition-colors duration-300;
   }
-  
+
   .nav-link-active {
     @apply text-foreground;
   }
-  
+
   /* Editorial Heading */
   .heading-editorial {
     font-family: 'Cormorant Garamond', serif;
     @apply text-4xl md:text-5xl lg:text-6xl font-light tracking-wide;
   }
-  
+
   /* Product Card */
   .product-card {
     @apply cursor-pointer;
   }
-  
+
   .product-card-image {
     @apply overflow-hidden bg-background-subtle;
   }
-  
+
   .product-card-image img {
     @apply transition-transform duration-700 ease-out;
   }
-  
+
   .product-card:hover .product-card-image img {
     @apply scale-105;
   }
-  
+
   /* Button Variants */
   .btn-primary {
     @apply bg-primary text-primary-foreground px-8 py-3 text-xs uppercase tracking-[0.2em] hover:bg-primary/90 transition-all duration-300;
   }
-  
+
   .btn-outline {
     @apply border border-primary text-primary px-8 py-3 text-xs uppercase tracking-[0.2em] hover:bg-primary hover:text-primary-foreground transition-all duration-300;
   }
-  
+
   /* Underline Animation */
   .link-underline {
     @apply relative;
   }
-  
+
   .link-underline::after {
     content: '';
     @apply absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300;
   }
-  
+
   .link-underline:hover::after {
     @apply w-full;
   }
-  
+
   /* Tag Styles */
   .tag-new {
     @apply text-[10px] uppercase tracking-[0.15em] text-accent-foreground bg-accent px-2 py-1;
   }
-  
+
   .tag-sold-out {
     @apply text-[10px] uppercase tracking-[0.15em] text-muted-foreground bg-muted px-2 py-1;
   }
 }
 
 @layer utilities {
+
   /* Background Subtle */
   .bg-background-subtle {
     background-color: hsl(var(--background-subtle));
   }
-  
+
   /* Accent Gold */
   .text-accent-gold {
     color: hsl(var(--accent-gold));
   }
-  
+
   .border-accent-gold {
     border-color: hsl(var(--accent-gold));
   }

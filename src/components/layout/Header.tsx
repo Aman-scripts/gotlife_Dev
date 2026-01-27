@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 
 const navLinks = [
-  { name: "Fragrances", href: "/" },
+  { name: "Fragrances", href: "/fragrances" },
   { name: "New", href: "/new" },
   { name: "Bestsellers", href: "/bestsellers" },
   { name: "About", href: "/about" },
@@ -12,7 +14,9 @@ const navLinks = [
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [cartCount] = useState(0);
+  const { getCartCount, setIsCartOpen } = useCart();
+  const { isAuthenticated, user, logout } = useAuth();
+  const cartCount = getCartCount();
 
   return (
     <>
@@ -46,7 +50,7 @@ export const Header = () => {
               to="/"
               className="absolute left-1/2 -translate-x-1/2 font-serif text-xl md:text-2xl tracking-[0.15em] uppercase"
             >
-              House of EM5
+              GotLife
             </Link>
 
             {/* Icons - Right */}
@@ -57,14 +61,30 @@ export const Header = () => {
               >
                 <Search className="h-4 w-4 md:h-5 md:w-5" />
               </button>
-              <button
-                aria-label="Account"
-                className="hidden md:block p-2 hover:opacity-60 transition-opacity duration-300"
-              >
-                <User className="h-5 w-5" />
-              </button>
+              {isAuthenticated ? (
+                <div className="hidden md:flex items-center space-x-4">
+                  <span className="text-xs text-muted-foreground">
+                    Hi, {user?.name?.split(' ')[0]}
+                  </span>
+                  <button
+                    onClick={logout}
+                    className="text-xs uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  aria-label="Account"
+                  className="hidden md:block p-2 hover:opacity-60 transition-opacity duration-300"
+                >
+                  <User className="h-5 w-5" />
+                </Link>
+              )}
               <button
                 aria-label="Cart"
+                onClick={() => setIsCartOpen(true)}
                 className="relative p-2 hover:opacity-60 transition-opacity duration-300"
               >
                 <ShoppingBag className="h-4 w-4 md:h-5 md:w-5" />
@@ -128,15 +148,32 @@ export const Header = () => {
                   </motion.div>
                 ))}
               </nav>
-              <div className="mt-auto p-6 border-t border-border">
-                <Link
-                  to="/account"
-                  className="flex items-center space-x-3 text-sm uppercase tracking-[0.15em]"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <User className="h-4 w-4" />
-                  <span>Account</span>
-                </Link>
+              <div className="mt-auto p-6 border-t border-border space-y-4">
+                {isAuthenticated ? (
+                  <>
+                    <p className="text-sm text-muted-foreground">
+                      Signed in as {user?.email}
+                    </p>
+                    <button
+                      onClick={() => {
+                        logout();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="text-sm uppercase tracking-[0.15em] text-foreground"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="flex items-center space-x-3 text-sm uppercase tracking-[0.15em]"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <User className="h-4 w-4" />
+                    <span>Login / Register</span>
+                  </Link>
+                )}
               </div>
             </motion.div>
           </>

@@ -7,11 +7,26 @@ import { Footer } from "@/components/layout/Footer";
 import { getProductById, products } from "@/data/products";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/CartContext";
+import { useToast } from "@/hooks/use-toast";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const product = getProductById(id || "");
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product, quantity);
+      toast({
+        title: "Added to cart",
+        description: `${quantity}x ${product.name} added to your cart`,
+      });
+      setQuantity(1);
+    }
+  };
 
   if (!product) {
     return (
@@ -179,7 +194,7 @@ const ProductDetail = () => {
                       <Plus className="h-4 w-4" />
                     </button>
                   </div>
-                  <Button variant="editorial" size="lg" className="flex-1">
+                  <Button variant="editorial" size="lg" className="flex-1" onClick={handleAddToCart}>
                     Add to Cart
                   </Button>
                 </div>

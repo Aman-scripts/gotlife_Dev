@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { SlidersHorizontal, ChevronDown } from "lucide-react";
 import { Header } from "@/components/layout/Header";
@@ -7,12 +7,15 @@ import { ProductGrid } from "@/components/product/ProductGrid";
 import { FilterDrawer } from "@/components/ui/FilterDrawer";
 import { products, filterOptions } from "@/data/products";
 
+type SortOption = "newest" | "price-asc" | "price-desc";
+
 const Index = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>(
     {}
   );
   const [sortOpen, setSortOpen] = useState(false);
+  const [currentSort, setCurrentSort] = useState<SortOption>("newest");
 
   const handleFilterChange = (section: string, value: string) => {
     setActiveFilters((prev) => {
@@ -23,6 +26,68 @@ const Index = () => {
       return { ...prev, [section]: updated };
     });
   };
+
+  const clearFilters = () => {
+    setActiveFilters({});
+  };
+
+  const sortOptions: { label: string; value: SortOption }[] = [
+    { label: "Newest", value: "newest" },
+    { label: "Price: Low to High", value: "price-asc" },
+    { label: "Price: High to Low", value: "price-desc" },
+  ];
+
+  const filteredAndSortedProducts = useMemo(() => {
+    let result = [...products];
+
+    // Apply category filter
+    const categoryFilters = activeFilters["Category"] || [];
+    if (categoryFilters.length > 0 && !categoryFilters.includes("all")) {
+      result = result.filter((p) => categoryFilters.includes(p.category));
+    }
+
+    // Apply concentration filter
+    const concentrationFilters = activeFilters["Concentration"] || [];
+    if (concentrationFilters.length > 0 && !concentrationFilters.includes("all")) {
+      result = result.filter((p) => {
+        const concentrationMap: Record<string, string> = {
+          parfum: "Parfum",
+          edp: "Eau de Parfum",
+          edt: "Eau de Toilette",
+        };
+        return concentrationFilters.some(
+          (filter) => concentrationMap[filter] === p.concentration
+        );
+      });
+    }
+
+    // Apply sorting
+    switch (currentSort) {
+      case "price-asc":
+        result.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        result.sort((a, b) => b.price - a.price);
+        break;
+      case "newest":
+      default:
+        result.sort((a, b) => {
+          if (a.tag === "new" && b.tag !== "new") return -1;
+          if (a.tag !== "new" && b.tag === "new") return 1;
+          return parseInt(b.id) - parseInt(a.id);
+        });
+        break;
+    }
+
+    return result;
+  }, [activeFilters, currentSort]);
+
+  const handleSort = (value: SortOption) => {
+    setCurrentSort(value);
+    setSortOpen(false);
+  };
+
+  const currentSortLabel = sortOptions.find((o) => o.value === currentSort)?.label;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -39,8 +104,8 @@ const Index = () => {
           <div className="container">
             <h1 className="heading-editorial mb-4">The Collection</h1>
             <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Discover our curated collection of artisanal fragrances. 
-              Each scent is a journey — crafted with rare ingredients 
+              Discover our curated collection of artisanal fragrances.
+              Each scent is a journey — crafted with rare ingredients
               and timeless elegance.
             </p>
           </div>
@@ -57,11 +122,16 @@ const Index = () => {
               >
                 <SlidersHorizontal className="h-4 w-4" />
                 <span>Filter</span>
+                {Object.values(activeFilters).flat().length > 0 && (
+                  <span className="ml-2 px-2 py-0.5 bg-primary text-primary-foreground text-[10px]">
+                    {Object.values(activeFilters).flat().length}
+                  </span>
+                )}
               </button>
 
               {/* Product Count */}
               <span className="text-xs text-muted-foreground hidden md:block">
-                {products.length} Fragrances
+                {filteredAndSortedProducts.length} Fragrances
               </span>
 
               {/* Sort Dropdown */}
@@ -70,11 +140,10 @@ const Index = () => {
                   onClick={() => setSortOpen(!sortOpen)}
                   className="flex items-center space-x-2 text-xs uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors duration-300"
                 >
-                  <span>Sort</span>
+                  <span>{currentSortLabel}</span>
                   <ChevronDown
-                    className={`h-3 w-3 transition-transform duration-300 ${
-                      sortOpen ? "rotate-180" : ""
-                    }`}
+                    className={`h-3 w-3 transition-transform duration-300 ${sortOpen ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
 
@@ -85,17 +154,18 @@ const Index = () => {
                       onClick={() => setSortOpen(false)}
                     />
                     <div className="absolute right-0 top-full mt-2 w-48 bg-background border border-border z-50 py-2">
-                      {["Newest", "Price: Low to High", "Price: High to Low"].map(
-                        (option) => (
-                          <button
-                            key={option}
-                            onClick={() => setSortOpen(false)}
-                            className="block w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors duration-200"
-                          >
-                            {option}
-                          </button>
-                        )
-                      )}
+                      {sortOptions.map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => handleSort(option.value)}
+                          className={`block w-full text-left px-4 py-2 text-sm transition-colors duration-200 ${currentSort === option.value
+                              ? "text-foreground bg-secondary"
+                              : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                            }`}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
                     </div>
                   </>
                 )}
@@ -107,13 +177,27 @@ const Index = () => {
         {/* Product Grid */}
         <section className="py-12 md:py-16">
           <div className="container">
-            <ProductGrid products={products} columns={4} />
+            {filteredAndSortedProducts.length > 0 ? (
+              <ProductGrid products={filteredAndSortedProducts} columns={4} />
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-muted-foreground mb-4">No products match your filters</p>
+                <button
+                  onClick={clearFilters}
+                  className="btn-outline"
+                >
+                  Clear Filters
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
         {/* Load More */}
         <section className="pb-16 md:pb-24 text-center">
-          <button className="btn-outline">View All Fragrances</button>
+          <button className="btn-outline" onClick={() => window.location.href = '/fragrances'}>
+            View All Fragrances
+          </button>
         </section>
       </main>
 
@@ -126,6 +210,7 @@ const Index = () => {
         filters={filterOptions}
         activeFilters={activeFilters}
         onFilterChange={handleFilterChange}
+        onClearFilters={clearFilters}
       />
     </div>
   );

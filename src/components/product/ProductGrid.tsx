@@ -5,7 +5,7 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  tag?: "new" | "sold-out";
+  tag?: "new" | "sold-out" | "bestseller";
 }
 
 interface ProductGridProps {

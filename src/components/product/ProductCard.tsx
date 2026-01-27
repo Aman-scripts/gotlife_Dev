@@ -6,7 +6,7 @@ interface ProductCardProps {
   name: string;
   price: number;
   image: string;
-  tag?: "new" | "sold-out";
+  tag?: "new" | "sold-out" | "bestseller";
   index?: number;
 }
 
@@ -27,6 +27,31 @@ export const ProductCard = ({
     }).format(price);
   };
 
+  const getTagLabel = () => {
+    switch (tag) {
+      case "new":
+        return "New";
+      case "sold-out":
+        return "Sold Out";
+      case "bestseller":
+        return "Bestseller";
+      default:
+        return "";
+    }
+  };
+
+  const getTagClass = () => {
+    switch (tag) {
+      case "new":
+      case "bestseller":
+        return "tag-new";
+      case "sold-out":
+        return "tag-sold-out";
+      default:
+        return "";
+    }
+  };
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -42,12 +67,12 @@ export const ProductCard = ({
             className="w-full h-full object-cover"
             loading="lazy"
           />
-          
+
           {/* Tag */}
           {tag && (
             <div className="absolute top-4 left-4">
-              <span className={tag === "new" ? "tag-new" : "tag-sold-out"}>
-                {tag === "new" ? "New" : "Sold Out"}
+              <span className={getTagClass()}>
+                {getTagLabel()}
               </span>
             </div>
           )}
