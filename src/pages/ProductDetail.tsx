@@ -176,25 +176,25 @@ const ProductDetail = () => {
 
               {/* Quantity & Add to Cart */}
               {!isSoldOut && (
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <div className="flex items-center border border-border">
+                <div className="flex flex-row gap-3 mb-8">
+                  <div className="flex items-center border border-border shrink-0">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="p-4 hover:bg-secondary transition-colors"
+                      className="px-3 py-3 hover:bg-secondary transition-colors"
                       aria-label="Decrease quantity"
                     >
-                      <Minus className="h-4 w-4" />
+                      <Minus className="h-3 w-3" />
                     </button>
-                    <span className="w-12 text-center text-sm">{quantity}</span>
+                    <span className="w-8 text-center text-xs font-medium">{quantity}</span>
                     <button
                       onClick={() => setQuantity(quantity + 1)}
-                      className="p-4 hover:bg-secondary transition-colors"
+                      className="px-3 py-3 hover:bg-secondary transition-colors"
                       aria-label="Increase quantity"
                     >
-                      <Plus className="h-4 w-4" />
+                      <Plus className="h-3 w-3" />
                     </button>
                   </div>
-                  <Button variant="editorial" size="lg" className="flex-1" onClick={handleAddToCart}>
+                  <Button variant="editorial" size="lg" className="flex-1 text-xs tracking-[0.2em] h-[46px]" onClick={handleAddToCart}>
                     Add to Cart
                   </Button>
                 </div>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { SlidersHorizontal, ChevronDown } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ContactSection } from "@/components/layout/ContactSection";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { FilterDrawer } from "@/components/ui/FilterDrawer";
 import { products, filterOptions } from "@/data/products";
@@ -99,11 +100,12 @@ const Index = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="py-16 md:py-24 text-center"
+          className="py-20 md:py-28 text-center bg-zinc-900 text-white"
         >
           <div className="container">
-            <h1 className="heading-editorial mb-4">The Collection</h1>
-            <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            <span className="text-xs uppercase tracking-[0.3em] text-zinc-400 mb-4 block">Premium Collection</span>
+            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-wide mb-6">The Collection</h1>
+            <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto leading-relaxed">
               Discover our curated collection of artisanal fragrances.
               Each scent is a journey — crafted with rare ingredients
               and timeless elegance.
@@ -112,7 +114,7 @@ const Index = () => {
         </motion.section>
 
         {/* Filter Bar */}
-        <section className="border-t border-b border-border">
+        <section>
           <div className="container py-4">
             <div className="flex items-center justify-between">
               {/* Filter Button */}
@@ -128,11 +130,6 @@ const Index = () => {
                   </span>
                 )}
               </button>
-
-              {/* Product Count */}
-              <span className="text-xs text-muted-foreground hidden md:block">
-                {filteredAndSortedProducts.length} Fragrances
-              </span>
 
               {/* Sort Dropdown */}
               <div className="relative">
@@ -159,8 +156,8 @@ const Index = () => {
                           key={option.value}
                           onClick={() => handleSort(option.value)}
                           className={`block w-full text-left px-4 py-2 text-sm transition-colors duration-200 ${currentSort === option.value
-                              ? "text-foreground bg-secondary"
-                              : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                            ? "text-foreground bg-secondary"
+                            : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                             }`}
                         >
                           {option.label}
@@ -193,12 +190,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Load More */}
-        <section className="pb-16 md:pb-24 text-center">
-          <button className="btn-outline" onClick={() => window.location.href = '/fragrances'}>
-            View All Fragrances
-          </button>
-        </section>
+        <ContactSection />
       </main>
 
       <Footer />

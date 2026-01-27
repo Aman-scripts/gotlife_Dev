@@ -105,7 +105,7 @@ const Fragrances = () => {
                 >
                     <div className="container">
                         <span className="text-xs uppercase tracking-[0.3em] text-zinc-400 mb-4 block">Premium Collection</span>
-                        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-wide mb-6">All Fragrances</h1>
+                        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-wide mb-6">Fragrances</h1>
                         <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto leading-relaxed">
                             Explore our complete collection of artisanal perfumes.
                             From bold orientals to fresh aquatics, find your signature scent.

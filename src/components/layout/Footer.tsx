@@ -47,7 +47,7 @@ export const Footer = () => {
               Quick Links
             </h4>
             <nav className="flex flex-col space-y-4">
-              {["All Fragrances", "New Arrivals", "Bestsellers", "About Us"].map(
+              {["Fragrances", "New Arrivals", "Bestsellers", "About Us"].map(
                 (link) => (
                   <Link
                     key={link}
