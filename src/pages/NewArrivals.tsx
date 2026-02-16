@@ -31,7 +31,7 @@ const NewArrivals = () => {
                 break;
             case "newest":
             default:
-                result.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+                result.sort((a, b) => b.id.localeCompare(a.id));
                 break;
         }
 

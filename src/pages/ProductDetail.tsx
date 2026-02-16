@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Minus, Plus } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -14,8 +14,17 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const product = getProductById(id || "");
   const [quantity, setQuantity] = useState(1);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const { addToCart } = useCart();
   const { toast } = useToast();
+
+  const nextImage = () => {
+    setActiveImageIndex((prev) => (prev + 1) % product.images.length);
+  };
+
+  const prevImage = () => {
+    setActiveImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length);
+  };
 
   const handleAddToCart = () => {
     if (product) {
@@ -79,29 +88,72 @@ const ProductDetail = () => {
         {/* Product Section */}
         <section className="container py-12 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-            {/* Product Image */}
+            {/* Product Gallery */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative"
+              className="flex flex-col gap-6"
             >
-              <div className="aspect-[3/4] bg-background-subtle overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
+              <div className="relative aspect-[4/3] bg-white border border-border/50 overflow-hidden group">
+                <motion.img
+                  key={activeImageIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                  src={product.images[activeImageIndex]}
+                  alt={`${product.name} view ${activeImageIndex + 1}`}
+                  className="w-full h-full object-contain scale-[1.4]"
                 />
+
+                {product.tag && (
+                  <div className="absolute top-6 left-6">
+                    <span
+                      className={
+                        product.tag === "new" || product.tag === "bestseller" ? "tag-new" : "tag-sold-out"
+                      }
+                    >
+                      {product.tag === "new" ? "New" : product.tag === "bestseller" ? "Bestseller" : "Sold Out"}
+                    </span>
+                  </div>
+                )}
               </div>
-              {product.tag && (
-                <div className="absolute top-6 left-6">
-                  <span
-                    className={
-                      product.tag === "new" ? "tag-new" : "tag-sold-out"
-                    }
+
+              {/* Thumbnails Slider Navigation */}
+              {product.images.length > 1 && (
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={prevImage}
+                    className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors shrink-0"
+                    aria-label="Previous image"
                   >
-                    {product.tag === "new" ? "New" : "Sold Out"}
-                  </span>
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+
+                  <div className="flex-1 grid grid-cols-5 gap-3">
+                    {product.images.map((img, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveImageIndex(idx)}
+                        className={`aspect-square transition-all duration-300 overflow-hidden bg-white ${activeImageIndex === idx ? "ring-2 ring-foreground z-10" : "opacity-60 hover:opacity-100"
+                          }`}
+                      >
+                        <img
+                          src={img}
+                          alt={`Thumbnail ${idx + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={nextImage}
+                    className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors shrink-0"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
                 </div>
               )}
             </motion.div>

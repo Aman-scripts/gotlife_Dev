@@ -54,7 +54,6 @@ const Index = () => {
         const concentrationMap: Record<string, string> = {
           parfum: "Parfum",
           edp: "Eau de Parfum",
-          edt: "Eau de Toilette",
         };
         return concentrationFilters.some(
           (filter) => concentrationMap[filter] === p.concentration
@@ -75,7 +74,7 @@ const Index = () => {
         result.sort((a, b) => {
           if (a.tag === "new" && b.tag !== "new") return -1;
           if (a.tag !== "new" && b.tag === "new") return 1;
-          return parseInt(b.id) - parseInt(a.id);
+          return b.id.localeCompare(a.id);
         });
         break;
     }

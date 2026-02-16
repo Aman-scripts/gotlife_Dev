@@ -60,17 +60,17 @@ export const ProductCard = ({
       className="product-card"
     >
       <Link to={`/product/${id}`} className="block">
-        <div className="product-card-image relative aspect-[3/4] mb-4">
+        <div className="product-card-image relative aspect-[4/3] mb-0 bg-white overflow-hidden group">
           <img
             src={image}
             alt={name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain scale-[1.4] transition-transform duration-700 group-hover:scale-[1.5]"
             loading="lazy"
           />
 
           {/* Tag */}
           {tag && (
-            <div className="absolute top-4 left-4">
+            <div className="absolute top-2 left-2 z-10">
               <span className={getTagClass()}>
                 {getTagLabel()}
               </span>
@@ -81,11 +81,11 @@ export const ProductCard = ({
           <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500" />
         </div>
 
-        <div className="text-center space-y-2">
-          <h3 className="font-serif text-base md:text-lg tracking-wide transition-opacity duration-300">
+        <div className="text-center pt-2">
+          <h3 className="font-serif text-base md:text-lg tracking-wide transition-opacity duration-300 leading-tight">
             {name}
           </h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground mt-0.5">
             {tag === "sold-out" ? (
               <span className="line-through">{formatPrice(price)}</span>
             ) : (

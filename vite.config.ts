@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [react()],
+  assetsInclude: ["**/*.JPG", "**/*.png"],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -1,17 +1,64 @@
-import perfume1 from "@/assets/products/perfume-1.jpg";
-import perfume2 from "@/assets/products/perfume-2.jpg";
-import perfume3 from "@/assets/products/perfume-3.jpg";
-import perfume4 from "@/assets/products/perfume-4.jpg";
-import perfume5 from "@/assets/products/perfume-5.jpg";
-import perfume6 from "@/assets/products/perfume-6.jpg";
-import perfume7 from "@/assets/products/perfume-7.jpg";
-import perfume8 from "@/assets/products/perfume-8.jpg";
+// Men's Fragrances
+// GOT BLACK ATTIRE
+import blackAttire1 from "@/assets/products/Mens/GOT BLACK ATTIRE FOR HIM IMAGES/first.png";
+import blackAttire2 from "@/assets/products/Mens/GOT BLACK ATTIRE FOR HIM IMAGES/second.jpg";
+import blackAttire3 from "@/assets/products/Mens/GOT BLACK ATTIRE FOR HIM IMAGES/third.jpg";
+import blackAttire4 from "@/assets/products/Mens/GOT BLACK ATTIRE FOR HIM IMAGES/fourth.jpg";
+import blackAttire5 from "@/assets/products/Mens/GOT BLACK ATTIRE FOR HIM IMAGES/fifth.jpg";
+
+// GOT DIVINE
+import divine1 from "@/assets/products/Mens/GOT DIVINE FOR HIM IMAGES/first.jpg";
+import divine2 from "@/assets/products/Mens/GOT DIVINE FOR HIM IMAGES/second.JPG";
+import divine3 from "@/assets/products/Mens/GOT DIVINE FOR HIM IMAGES/third.JPG";
+import divine4 from "@/assets/products/Mens/GOT DIVINE FOR HIM IMAGES/fourth.jpg";
+import divine5 from "@/assets/products/Mens/GOT DIVINE FOR HIM IMAGES/fifth.jpg";
+
+// GOT LEGEND
+import legend1 from "@/assets/products/Mens/GOT LEGEDN FOR HIM IMAGES/first.jpg";
+import legend2 from "@/assets/products/Mens/GOT LEGEDN FOR HIM IMAGES/second.jpg";
+import legend3 from "@/assets/products/Mens/GOT LEGEDN FOR HIM IMAGES/third.jpg";
+import legend4 from "@/assets/products/Mens/GOT LEGEDN FOR HIM IMAGES/fourth.jpg";
+import legend5 from "@/assets/products/Mens/GOT LEGEDN FOR HIM IMAGES/fifth.jpg";
+
+// GOT SUPREME
+import supreme1 from "@/assets/products/Mens/GOT SUPREME FOR HIM IMAGES/first.jpg";
+import supreme2 from "@/assets/products/Mens/GOT SUPREME FOR HIM IMAGES/second.jpg";
+import supreme3 from "@/assets/products/Mens/GOT SUPREME FOR HIM IMAGES/third.JPG";
+import supreme4 from "@/assets/products/Mens/GOT SUPREME FOR HIM IMAGES/fourth.jpg";
+import supreme5 from "@/assets/products/Mens/GOT SUPREME FOR HIM IMAGES/fifth.jpg";
+
+// Women's Fragrances
+// GOT ESSENCE
+import essence1 from "@/assets/products/Womens/GOT ESSENCE FOR HER IMAGES/first.jpg";
+import essence2 from "@/assets/products/Womens/GOT ESSENCE FOR HER IMAGES/second.jpg";
+import essence3 from "@/assets/products/Womens/GOT ESSENCE FOR HER IMAGES/third.jpg";
+import essence4 from "@/assets/products/Womens/GOT ESSENCE FOR HER IMAGES/fourth.jpg";
+import essence5 from "@/assets/products/Womens/GOT ESSENCE FOR HER IMAGES/fifth.jpg";
+
+// GOT ILLUSION
+import illusion1 from "@/assets/products/Womens/GOT ILLUSION FOR HER IMAGES/first.jpg";
+import illusion2 from "@/assets/products/Womens/GOT ILLUSION FOR HER IMAGES/second.jpg";
+import illusion3 from "@/assets/products/Womens/GOT ILLUSION FOR HER IMAGES/third.jpg";
+import illusion4 from "@/assets/products/Womens/GOT ILLUSION FOR HER IMAGES/fourth.jpg";
+
+// GOT LONDON BLUSH
+import londonBlush1 from "@/assets/products/Womens/GOT LONDON BLUSH FOR HER IMAGES/first.JPG";
+import londonBlush2 from "@/assets/products/Womens/GOT LONDON BLUSH FOR HER IMAGES/second.JPG";
+import londonBlush3 from "@/assets/products/Womens/GOT LONDON BLUSH FOR HER IMAGES/third.JPG";
+import londonBlush4 from "@/assets/products/Womens/GOT LONDON BLUSH FOR HER IMAGES/fourth.JPG";
+import londonBlush5 from "@/assets/products/Womens/GOT LONDON BLUSH FOR HER IMAGES/fifth.JPG";
+
+// GOT LUSH AURA
+import lushAura1 from "@/assets/products/Womens/GOT LUSH AURA FOR HER IMAGES/first.JPG";
+import lushAura2 from "@/assets/products/Womens/GOT LUSH AURA FOR HER IMAGES/second.png";
+import lushAura3 from "@/assets/products/Womens/GOT LUSH AURA FOR HER IMAGES/third.jpg";
 
 export interface Product {
   id: string;
   name: string;
   price: number;
   image: string;
+  images: string[];
   tag?: "new" | "sold-out" | "bestseller";
   category: string;
   description: string;
@@ -25,129 +72,139 @@ export interface Product {
 }
 
 export const products: Product[] = [
+  // Men's Collection
   {
-    id: "1",
-    name: "Amber Elixir",
-    price: 12500,
-    image: perfume1,
+    id: "m1",
+    name: "Black Attire",
+    price: 3499,
+    image: blackAttire1,
+    images: [blackAttire1, blackAttire2, blackAttire3, blackAttire4, blackAttire5],
+    tag: "bestseller",
+    category: "Mens",
+    description: "A sophisticated and powerful fragrance for the modern man. Black Attire exudes confidence with its deep, smoky notes and a hint of mysterious elegance.",
+    notes: {
+      top: ["Bergamot", "Pink Pepper"],
+      heart: ["Leather", "Patchouli"],
+      base: ["Amber", "Oakmoss"],
+    },
+    size: "100ml",
+    concentration: "Eau de Parfum",
+  },
+  {
+    id: "m2",
+    name: "Divine",
+    price: 3299,
+    image: divine1,
+    images: [divine1, divine2, divine3, divine4, divine5],
+    category: "Mens",
+    description: "Experience a scent that transcends the ordinary. Divine is a celestial blend of fresh citrus and sacred woods, perfect for the man who seeks a higher standard.",
+    notes: {
+      top: ["Grapefruit", "Sea Notes"],
+      heart: ["Jasmine", "Bay Leaf"],
+      base: ["Guaiac Wood", "Ambergris"],
+    },
+    size: "100ml",
+    concentration: "Eau de Parfum",
+  },
+  {
+    id: "m3",
+    name: "Legend",
+    price: 3699,
+    image: legend1,
+    images: [legend1, legend2, legend3, legend4, legend5],
     tag: "new",
-    category: "oriental",
-    description: "A luxurious amber fragrance with golden warmth. This opulent scent opens with sparkling citrus before revealing a heart of precious amber, enriched by vanilla and sandalwood.",
+    category: "Mens",
+    description: "Some are born, others are made. Legend represents the timeless appeal of strength and charisma, combining classic fougere elements with a modern twist.",
     notes: {
-      top: ["Bergamot", "Pink Pepper", "Saffron"],
-      heart: ["Amber", "Jasmine", "Rose"],
-      base: ["Sandalwood", "Vanilla", "Musk"],
+      top: ["Lavender", "Pineapple"],
+      heart: ["Red Apple", "Dried Fruits"],
+      base: ["Sandalwood", "Tonka Bean"],
     },
     size: "100ml",
     concentration: "Eau de Parfum",
   },
   {
-    id: "2",
-    name: "Noir Absolute",
-    price: 15500,
-    image: perfume2,
-    category: "woody",
-    description: "A bold and mysterious fragrance for the modern connoisseur. Dark, sensual, and utterly captivating with notes of oud and leather wrapped in smoky incense.",
+    id: "m4",
+    name: "Supreme",
+    price: 3899,
+    image: supreme1,
+    images: [supreme1, supreme2, supreme3, supreme4, supreme5],
+    category: "Mens",
+    description: "The pinnacle of masculinity. Supreme is an intense, long-lasting fragrance that commands attention with its rich spicy heart and warm woody base.",
     notes: {
-      top: ["Black Pepper", "Cardamom", "Bergamot"],
-      heart: ["Oud", "Leather", "Incense"],
-      base: ["Vetiver", "Amber", "Musk"],
+      top: ["Cardamom", "Cinnamon"],
+      heart: ["Incense", "Cedarwood"],
+      base: ["Vanilla", "Tobacco"],
     },
     size: "100ml",
-    concentration: "Extrait de Parfum",
-  },
-  {
-    id: "3",
-    name: "Rose Pétale",
-    price: 9500,
-    image: perfume3,
-    tag: "new",
-    category: "floral",
-    description: "A romantic ode to the queen of flowers. Fresh Bulgarian roses dance with dewy petals and a whisper of peony, creating an enchanting feminine signature.",
-    notes: {
-      top: ["Pink Pepper", "Lychee", "Bergamot"],
-      heart: ["Bulgarian Rose", "Peony", "Magnolia"],
-      base: ["White Musk", "Cedar", "Ambrette"],
-    },
-    size: "75ml",
-    concentration: "Eau de Parfum",
-  },
-  {
-    id: "4",
-    name: "Blanc Absolu",
-    price: 18500,
-    image: perfume4,
-    category: "fresh",
-    description: "Minimalist luxury in a bottle. A clean, sophisticated scent that celebrates purity with crisp white flowers, soft musks, and a subtle woody dry-down.",
-    notes: {
-      top: ["Aldehydes", "Green Apple", "Bergamot"],
-      heart: ["White Flowers", "Iris", "Lily of the Valley"],
-      base: ["White Musk", "Cashmere Wood", "Ambergris"],
-    },
-    size: "100ml",
-    concentration: "Eau de Parfum",
-  },
-  {
-    id: "5",
-    name: "Oud Royale",
-    price: 28500,
-    image: perfume5,
-    category: "oriental",
-    description: "The essence of Arabian luxury. Rare oud wood meets precious saffron and Bulgarian rose in this opulent, long-lasting fragrance fit for royalty.",
-    notes: {
-      top: ["Saffron", "Cinnamon", "Cardamom"],
-      heart: ["Oud", "Bulgarian Rose", "Orris"],
-      base: ["Amber", "Sandalwood", "Musk"],
-    },
-    size: "50ml",
     concentration: "Parfum",
   },
+  // Women's Collection
   {
-    id: "6",
-    name: "Citrus Verbena",
-    price: 7500,
-    image: perfume6,
-    tag: "sold-out",
-    category: "fresh",
-    description: "A vibrant burst of Mediterranean sunshine. Zesty Italian lemons and fresh verbena create an invigorating scent that captures summer in a bottle.",
+    id: "w1",
+    name: "Essence",
+    price: 2999,
+    image: essence1,
+    images: [essence1, essence2, essence3, essence4, essence5],
+    tag: "new",
+    category: "Womens",
+    description: "Pure grace in a bottle. Essence captures the delicate beauty of blooming flowers and the softness of light, creating a signature that is both timeless and modern.",
     notes: {
-      top: ["Lemon", "Lime", "Grapefruit"],
-      heart: ["Verbena", "Green Tea", "Basil"],
-      base: ["White Cedar", "Musk", "Vetiver"],
+      top: ["Neroli", "Mandarin"],
+      heart: ["Tuberose", "Orange Blossom"],
+      base: ["White Musk", "Cedar"],
     },
     size: "100ml",
-    concentration: "Eau de Toilette",
-  },
-  {
-    id: "7",
-    name: "Velvet Orchid",
-    price: 14500,
-    image: perfume7,
-    tag: "new",
-    category: "floral",
-    description: "A seductive evening fragrance with mysterious depth. Dark orchid blooms unfold against a backdrop of velvet plum and intoxicating ylang-ylang.",
-    notes: {
-      top: ["Plum", "Rum", "Bergamot"],
-      heart: ["Black Orchid", "Ylang-Ylang", "Jasmine"],
-      base: ["Dark Chocolate", "Patchouli", "Vanilla"],
-    },
-    size: "75ml",
     concentration: "Eau de Parfum",
   },
   {
-    id: "8",
-    name: "Aqua Marine",
-    price: 8500,
-    image: perfume8,
-    category: "fresh",
-    description: "The essence of ocean breeze and coastal freshness. Cool aquatic notes blend with sea salt and driftwood for an effortlessly clean signature.",
+    id: "w2",
+    name: "Illusion",
+    price: 3199,
+    image: illusion1,
+    images: [illusion1, illusion2, illusion3, illusion4],
+    category: "Womens",
+    description: "A captivating play of light and shadow. Illusion is a mysterious fragrance that keeps them guessing, with its enchanting blend of sweet fruits and dark florals.",
     notes: {
-      top: ["Sea Salt", "Bergamot", "Grapefruit"],
-      heart: ["Marine Accord", "Lotus", "Water Lily"],
-      base: ["Driftwood", "White Musk", "Ambergris"],
+      top: ["Pear", "Blackcurrant"],
+      heart: ["Iris", "Praline"],
+      base: ["Patchouli", "Vanilla"],
     },
     size: "100ml",
-    concentration: "Eau de Toilette",
+    concentration: "Eau de Parfum",
+  },
+  {
+    id: "w3",
+    name: "London Blush",
+    price: 3399,
+    image: londonBlush1,
+    images: [londonBlush1, londonBlush2, londonBlush3, londonBlush4, londonBlush5],
+    tag: "bestseller",
+    category: "Womens",
+    description: "Chic, vibrant, and utterly British. London Blush captures the energy of the city with its sparkling citrus opening and a romantic heart of English roses.",
+    notes: {
+      top: ["Lemon", "Red Fruits"],
+      heart: ["Rose", "Peony"],
+      base: ["Amber", "Musk"],
+    },
+    size: "100ml",
+    concentration: "Eau de Parfum",
+  },
+  {
+    id: "w4",
+    name: "Lush Aura",
+    price: 3599,
+    image: lushAura1,
+    images: [lushAura1, lushAura2, lushAura3],
+    category: "Womens",
+    description: "Radiate beauty with every step. Lush Aura is an intoxicating fragrance that surrounds you with a veil of exotic blooms and warm, golden undertones.",
+    notes: {
+      top: ["Mango", "Grapefruit"],
+      heart: ["Jasmine", "Lotus"],
+      base: ["Sandalwood", "Ambergris"],
+    },
+    size: "100ml",
+    concentration: "Parfum",
   },
 ];
 
@@ -156,10 +213,8 @@ export const filterOptions = [
     title: "Category",
     options: [
       { label: "All", value: "all" },
-      { label: "Oriental", value: "oriental" },
-      { label: "Woody", value: "woody" },
-      { label: "Floral", value: "floral" },
-      { label: "Fresh", value: "fresh" },
+      { label: "Men", value: "Mens" },
+      { label: "Women", value: "Womens" },
     ],
   },
   {
@@ -176,7 +231,6 @@ export const filterOptions = [
       { label: "All", value: "all" },
       { label: "Parfum", value: "parfum" },
       { label: "Eau de Parfum", value: "edp" },
-      { label: "Eau de Toilette", value: "edt" },
     ],
   },
 ];
