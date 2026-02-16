@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ProductCardProps {
   id: string;
@@ -18,6 +20,7 @@ export const ProductCard = ({
   tag,
   index = 0,
 }: ProductCardProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
@@ -61,10 +64,12 @@ export const ProductCard = ({
     >
       <Link to={`/product/${id}`} className="block">
         <div className="product-card-image relative aspect-[4/3] mb-0 bg-white overflow-hidden group">
+          {!isLoaded && <Skeleton className="absolute inset-0 z-10" />}
           <img
             src={image}
             alt={name}
-            className="w-full h-full object-contain scale-[1.4] transition-transform duration-700 group-hover:scale-[1.5]"
+            onLoad={() => setIsLoaded(true)}
+            className={`w-full h-full object-contain scale-[1.4] transition-all duration-700 group-hover:scale-[1.5] ${isLoaded ? "opacity-100" : "opacity-0"}`}
             loading="lazy"
           />
 
