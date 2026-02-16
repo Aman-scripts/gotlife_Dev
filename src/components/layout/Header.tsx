@@ -23,18 +23,18 @@ export const Header = () => {
     <>
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="relative flex items-center justify-between h-16 md:h-24">
             {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 -ml-2"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open menu"
             >
-              <Menu className="h-5 w-5" />
+              <Menu className="h-6 w-6" />
             </button>
 
             {/* Desktop Navigation - Left */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-8 text-sm uppercase tracking-[0.2em] font-medium">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -46,8 +46,8 @@ export const Header = () => {
               ))}
             </nav>
 
-            {/* Logo - Center (Desktop) / Left (Mobile) */}
-            <div className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+            {/* Logo - Perfectly Centered */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <Logo />
             </div>
 
