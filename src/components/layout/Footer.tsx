@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
+import { Logo } from "./Logo";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -17,26 +18,19 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           {/* Brand Section */}
           <div className="md:col-span-5">
-            <Link
-              to="/"
-              className="font-serif text-2xl tracking-[0.15em] uppercase"
-            >
-              GotLife
-            </Link>
+            <Logo />
             <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              A contemporary fragrance house crafting timeless scents that
-              blend artistry with modern sensibilities. Each creation
-              is a testament to the art of perfumery, designed for the discerning nose.
+              GOT – “Guardian of Temptation”. A contemporary fragrance house crafting timeless scents that blend artistry with modern sensibilities.
             </p>
             <a
-              href="https://instagram.com/gotlife"
+              href="https://instagram.com/gotlifeofficial"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               <Instagram className="h-4 w-4" />
               <span className="uppercase tracking-[0.15em] text-xs">
-                @gotlife
+                @gotlifeofficial
               </span>
             </a>
           </div>
@@ -111,16 +105,22 @@ export const Footer = () => {
           <p>© 2024 GotLife. All rights reserved.</p>
           <div className="flex items-center space-x-6 mt-4 md:mt-0">
             <Link
-              to="/privacy"
+              to="/privacy-policy"
               className="hover:text-foreground transition-colors duration-300"
             >
               Privacy Policy
             </Link>
             <Link
-              to="/terms"
+              to="/terms-and-conditions"
               className="hover:text-foreground transition-colors duration-300"
             >
-              Terms of Service
+              Terms & Conditions
+            </Link>
+            <Link
+              to="/refund-policy"
+              className="hover:text-foreground transition-colors duration-300"
+            >
+              Refund Policy
             </Link>
           </div>
         </div>

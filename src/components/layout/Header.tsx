@@ -4,6 +4,7 @@ import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
+import { Logo } from "./Logo";
 
 const navLinks = [
   { name: "Fragrances", href: "/fragrances" },
@@ -45,13 +46,10 @@ export const Header = () => {
               ))}
             </nav>
 
-            {/* Logo - Center */}
-            <Link
-              to="/"
-              className="absolute left-1/2 -translate-x-1/2 font-serif text-xl md:text-2xl tracking-[0.15em] uppercase"
-            >
-              GotLife
-            </Link>
+            {/* Logo - Center (Desktop) / Left (Mobile) */}
+            <div className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+              <Logo />
+            </div>
 
             {/* Icons - Right */}
             <div className="flex items-center space-x-4 md:space-x-6">

@@ -1,46 +1,43 @@
 import { motion } from "framer-motion";
-import { Sparkles, Heart, Clock, Award, Shield, Leaf } from "lucide-react";
+import { Sparkles, Heart, Clock, Award, Shield, Leaf, Target, Eye, TrendingUp } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactSection } from "@/components/layout/ContactSection";
 
 const About = () => {
-    const features = [
+    const highlights = [
         {
             icon: Sparkles,
             title: "Premium Quality",
-            description:
-                "We source only the finest ingredients from renowned perfume houses across France, India, and the Middle East.",
+            description: "Inspired by global luxury standards, our perfumes combine premium-quality fragrances with long-lasting performance.",
         },
         {
             icon: Clock,
             title: "Long-Lasting",
-            description:
-                "Our fragrances are crafted to last 8-12 hours, ensuring you smell captivating from morning to night.",
+            description: "Designed for Indian weather to ensure richesse, depth, and longevity that stands out.",
         },
         {
             icon: Award,
             title: "Affordable Luxury",
-            description:
-                "Experience premium fragrances without the premium price tag. Luxury should be accessible to everyone.",
+            description: "Premium fragrances at accessible prices, because luxury should be for everyone who dares to stand out.",
+        },
+    ];
+
+    const promises = [
+        {
+            icon: Shield,
+            title: "Quality you can trust",
+            description: "Carefully selected and tested formulations to ensure global standards.",
         },
         {
             icon: Heart,
-            title: "Made with Passion",
-            description:
-                "Every bottle is a labor of love, crafted by master perfumers with decades of experience.",
+            title: "Scents that last",
+            description: "Crafted for real moments, elevating your presence throughout the day.",
         },
         {
-            icon: Shield,
-            title: "Authentic Ingredients",
-            description:
-                "100% authentic fragrance oils with no harmful chemicals. Safe for all skin types.",
-        },
-        {
-            icon: Leaf,
-            title: "Sustainable",
-            description:
-                "Eco-friendly packaging and cruelty-free formulations. Beauty without compromise.",
+            icon: TrendingUp,
+            title: "Confidence that stays",
+            description: "Helping you 'LEAVE YOUR MARK' with an irresistible presence.",
         },
     ];
 
@@ -54,117 +51,133 @@ const About = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8 }}
-                    className="py-20 md:py-28 text-center bg-zinc-900 text-white"
+                    className="py-24 md:py-32 text-center bg-zinc-900 text-white relative overflow-hidden"
                 >
-                    <div className="container">
-                        <span className="text-xs uppercase tracking-[0.2em] text-zinc-400 mb-3 block">Our Story</span>
-                        <h1 className="font-serif text-3xl md:text-5xl tracking-wide mb-4">About GotLife</h1>
-                        <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto leading-relaxed">
-                            GotLife was born from a simple belief — that everyone deserves
-                            to experience the transformative power of exquisite fragrances.
+                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
+                    <div className="container relative z-10">
+                        <span className="text-xs uppercase tracking-[0.3em] text-zinc-400 mb-4 block">About GOTLIFE</span>
+                        <h1 className="font-serif text-4xl md:text-6xl tracking-tight mb-6">More Than a Company — It's a Mindset</h1>
+                        <p className="text-sm md:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed font-light">
+                            Born from a passion for self-expression and confidence, GOTLIFE was created to build brands that leave a lasting impression.
                         </p>
                     </div>
                 </motion.section>
 
-                {/* Brand Story */}
-                <section className="py-12 md:py-16">
+                {/* Our Story */}
+                <section className="py-20 md:py-28">
                     <div className="container">
-                        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+                        <div className="grid md:grid-cols-2 gap-16 items-center">
                             <motion.div
-                                initial={{ opacity: 0, x: -20 }}
+                                initial={{ opacity: 0, x: -30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
+                                transition={{ duration: 0.8 }}
                             >
-                                <h2 className="font-serif text-2xl md:text-3xl mb-4">
-                                    The Art of Fragrance
-                                </h2>
-                                <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">Our Story</span>
+                                <h2 className="font-serif text-3xl md:text-4xl mb-8">Elegance, Power, and Irresistible Presence</h2>
+                                <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
                                     <p>
-                                        Founded in 2024, GotLife emerged from a passion to make luxury
-                                        accessible. We believe that a great fragrance is not just a scent —
-                                        it's an expression of identity, a memory in a bottle.
+                                        At GOTLIFE, we believe fragrance is not just something you wear — it’s something you become. Every scent under our flagship brand <span className="text-foreground font-semibold">GOT</span> is designed to enhance your personality and elevate your moments.
                                     </p>
                                     <p>
-                                        Our master perfumers blend traditional craftsmanship with modern
-                                        innovation, creating fragrances that resonate with contemporary
-                                        sensibilities while honoring timeless elegance.
+                                        Inspired by modern luxury yet crafted for everyday wear, our perfumes help you make a statement without saying a word. We combine premium-quality fragrances with long-lasting performance at accessible prices.
                                     </p>
                                 </div>
                             </motion.div>
                             <motion.div
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                                className="grid grid-cols-2 gap-2"
+                                transition={{ duration: 0.8 }}
+                                className="relative aspect-[4/5] bg-zinc-100 overflow-hidden"
                             >
-                                <img src="/src/assets/products/perfume-1.jpg" alt="GotLife Collection" className="aspect-square object-cover" />
-                                <img src="/src/assets/products/perfume-2.jpg" alt="GotLife Collection" className="aspect-square object-cover" />
+                                <img
+                                    src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80"
+                                    alt="GOT Fragrance"
+                                    className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-1000"
+                                />
+                                <div className="absolute inset-0 border-[20px] border-white/10 m-4 pointer-events-none"></div>
                             </motion.div>
                         </div>
                     </div>
                 </section>
 
-                {/* Why Choose Us */}
-                <section className="py-12 md:py-16 bg-zinc-900 text-white">
-                    <div className="container">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="text-center mb-10"
-                        >
-                            <h2 className="font-serif text-2xl md:text-3xl mb-2 text-white">
-                                Why Choose GotLife
-                            </h2>
-                            <p className="text-sm text-zinc-400">
-                                We're committed to excellence in every aspect of our craft
-                            </p>
-                        </motion.div>
-
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {features.map((feature, index) => (
-                                <motion.div
-                                    key={feature.title}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    className="p-5 bg-zinc-800 border border-zinc-700"
-                                >
-                                    <feature.icon className="h-6 w-6 mb-3 text-zinc-300" />
-                                    <h3 className="font-serif text-base mb-1 text-white">{feature.title}</h3>
-                                    <p className="text-xs text-zinc-400 leading-relaxed">
-                                        {feature.description}
-                                    </p>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Vision */}
-                <section className="py-12 md:py-16">
+                {/* Philosophy */}
+                <section className="py-20 md:py-28 bg-zinc-50 border-y border-border">
                     <div className="container text-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="max-w-2xl mx-auto"
+                            className="max-w-3xl mx-auto"
                         >
-                            <h2 className="font-serif text-2xl md:text-3xl mb-4">Our Vision</h2>
-                            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                                To become India's most loved premium fragrance brand, known for
-                                quality, affordability, and innovation. We envision a world where
-                                everyone can discover their signature scent without compromise.
-                            </p>
-                            <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
-                                Crafted with love in India 🇮🇳
+                            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">Our Philosophy</span>
+                            <h2 className="font-serif text-3xl md:text-5xl mb-8 italic">"Your fragrance should speak before you do."</h2>
+                            <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-12">
+                                From weddings and celebrations to everyday confidence, our perfumes are created to match every mood, moment, and memory. Each formulation is carefully selected and tested to ensure richness, depth, and longevity that stands out.
                             </p>
                         </motion.div>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {highlights.map((item, index) => (
+                                <motion.div
+                                    key={item.title}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                    className="p-8 bg-white border border-border hover:shadow-xl transition-shadow duration-500"
+                                >
+                                    <item.icon className="h-8 w-8 mb-6 mx-auto text-zinc-400" />
+                                    <h3 className="font-serif text-lg mb-3 uppercase tracking-wider">{item.title}</h3>
+                                    <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Vision & Promise */}
+                <section className="py-20 md:py-28">
+                    <div className="container">
+                        <div className="grid md:grid-cols-2 gap-16">
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                <h2 className="font-serif text-2xl md:text-3xl mb-6">Our Vision</h2>
+                                <p className="text-sm text-muted-foreground leading-relaxed mb-8">
+                                    Our vision is to build GOT into a trusted Indian fragrance brand that competes with global names, while staying rooted in authenticity, quality, and value. We aim to make luxury fragrances accessible to everyone who dares to stand out.
+                                </p>
+                                <div className="p-6 bg-zinc-900 text-white inline-block">
+                                    <p className="text-xs uppercase tracking-[0.3em]">Crafted for real moments</p>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6 }}
+                                className="space-y-8"
+                            >
+                                <h2 className="font-serif text-2xl md:text-3xl mb-6">Our Promise</h2>
+                                {promises.map((promise) => (
+                                    <div key={promise.title} className="flex gap-4">
+                                        <div className="mt-1">
+                                            <promise.icon className="h-5 w-5 text-zinc-400" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-medium text-sm mb-1">{promise.title}</h3>
+                                            <p className="text-xs text-muted-foreground leading-relaxed">{promise.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </motion.div>
+                        </div>
                     </div>
                 </section>
 
