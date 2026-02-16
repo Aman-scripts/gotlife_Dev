@@ -18,7 +18,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           {/* Brand Section */}
           <div className="md:col-span-5">
-            <Logo />
+            <Logo showTextOnMobile={true} />
             <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
               GOT – “Guardian of Temptation”. A contemporary fragrance house crafting timeless scents that blend artistry with modern sensibilities.
             </p>

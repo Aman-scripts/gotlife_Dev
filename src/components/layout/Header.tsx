@@ -23,7 +23,7 @@ export const Header = () => {
     <>
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto">
-          <div className="relative flex items-center justify-between h-16 md:h-24">
+          <div className="relative flex items-center justify-between h-20 md:h-24">
             {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 -ml-2"
