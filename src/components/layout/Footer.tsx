@@ -61,13 +61,18 @@ export const Footer = () => {
               Support
             </h4>
             <nav className="flex flex-col space-y-4">
-              {["Shipping", "Returns", "Fragrance Guide", "Contact"].map((link) => (
+              {[
+                { name: "Privacy Policy", to: "/privacy-policy" },
+                { name: "Terms & Conditions", to: "/terms-and-conditions" },
+                { name: "Refund Policy", to: "/refund-policy" },
+                { name: "Contact", to: "/contact" },
+              ].map((link) => (
                 <Link
-                  key={link}
-                  to={`/${link.toLowerCase().replace(" ", "-")}`}
+                  key={link.name}
+                  to={link.to}
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
                 >
-                  {link}
+                  {link.name}
                 </Link>
               ))}
             </nav>
@@ -97,31 +102,6 @@ export const Footer = () => {
                 →
               </button>
             </form>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between text-xs text-muted-foreground">
-          <p>© 2024 GotLife. All rights reserved.</p>
-          <div className="flex items-center space-x-6 mt-4 md:mt-0">
-            <Link
-              to="/privacy-policy"
-              className="hover:text-foreground transition-colors duration-300"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              to="/terms-and-conditions"
-              className="hover:text-foreground transition-colors duration-300"
-            >
-              Terms & Conditions
-            </Link>
-            <Link
-              to="/refund-policy"
-              className="hover:text-foreground transition-colors duration-300"
-            >
-              Refund Policy
-            </Link>
           </div>
         </div>
       </div>
