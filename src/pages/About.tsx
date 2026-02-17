@@ -64,7 +64,7 @@ const About = () => {
                 </motion.section>
 
                 {/* Our Story */}
-                <section className="py-20 md:py-28">
+                <section className="md:py-4">
                     <div className="container">
                         <div className="grid md:grid-cols-2 gap-16 items-center">
                             <motion.div
