@@ -21,7 +21,7 @@ const Index = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden bg-zinc-950 text-white"
+          className="relative h-[60vh] md:h-[80vh] flex items-center justify-center overflow-hidden bg-zinc-950 text-white"
         >
           <div className="absolute inset-0 z-0 opacity-40">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-700 via-zinc-900 to-black" />
@@ -57,7 +57,7 @@ const Index = () => {
         </motion.section>
 
         {/* Featured Collection Section */}
-        <section className="py-16 md:py-32 bg-[#fafafa]">
+        <section className="py-12 md:py-32 bg-[#fafafa]">
           <div className="container px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -70,7 +70,7 @@ const Index = () => {
               <div className="w-8 md:w-12 h-px bg-black/10 mx-auto mt-6 md:mt-8" />
             </motion.div>
 
-            <ProductGrid products={featuredProducts} columns={4} />
+            <ProductGrid products={featuredProducts} columns={4} hideDetails={true} />
 
             <motion.div
               initial={{ opacity: 0 }}

@@ -10,6 +10,7 @@ interface ProductCardProps {
   image: string;
   tag?: "new" | "sold-out" | "bestseller";
   index?: number;
+  hideDetails?: boolean;
 }
 
 export const ProductCard = ({
@@ -19,6 +20,7 @@ export const ProductCard = ({
   image,
   tag,
   index = 0,
+  hideDetails = false,
 }: ProductCardProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -87,18 +89,20 @@ export const ProductCard = ({
           </div>
         </div>
 
-        <div className="text-center space-y-1 md:space-y-1.5 px-1 md:px-2">
-          <h3 className="font-serif text-base md:text-xl tracking-wide group-hover:opacity-70 transition-opacity duration-300">
-            {name}
-          </h3>
-          <p className="text-[10px] md:text-sm font-light tracking-[0.1em] text-muted-foreground uppercase">
-            {tag === "sold-out" ? (
-              <span className="line-through opacity-50">{formatPrice(price)}</span>
-            ) : (
-              formatPrice(price)
-            )}
-          </p>
-        </div>
+        {!hideDetails && (
+          <div className="text-center space-y-1 md:space-y-1.5 px-1 md:px-2">
+            <h3 className="font-serif text-base md:text-xl tracking-wide group-hover:opacity-70 transition-opacity duration-300">
+              {name}
+            </h3>
+            <p className="text-[10px] md:text-sm font-light tracking-[0.1em] text-muted-foreground uppercase">
+              {tag === "sold-out" ? (
+                <span className="line-through opacity-50">{formatPrice(price)}</span>
+              ) : (
+                formatPrice(price)
+              )}
+            </p>
+          </div>
+        )}
       </Link>
     </motion.article>
   );
