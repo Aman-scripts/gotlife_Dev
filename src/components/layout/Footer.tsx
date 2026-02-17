@@ -2,14 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
 import { Logo } from "./Logo";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export const Footer = () => {
-  const [email, setEmail] = useState("");
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<{ email: string }>({
+    mode: "onChange"
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle newsletter subscription
-    setEmail("");
+  const onSubmit = (data: any) => {
+    toast.success("Message sent successfully! Our specialists will contact you soon.");
+    reset();
   };
 
   return (
@@ -86,14 +89,12 @@ export const Footer = () => {
             <p className="text-sm text-muted-foreground mb-4">
               Subscribe for exclusive scent launches
             </p>
-            <form onSubmit={handleSubmit} className="relative">
+            <form onSubmit={handleSubmit(onSubmit)} className="relative">
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email", { required: true })}
                 placeholder="Email"
                 className="w-full bg-transparent border-b border-border pb-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-foreground transition-colors duration-300"
-                required
               />
               <button
                 type="submit"
