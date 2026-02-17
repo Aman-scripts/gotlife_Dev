@@ -2,7 +2,8 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 
 export interface User {
     id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     phone?: string;
 }
@@ -11,7 +12,13 @@ interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
     login: (email: string, password: string) => Promise<boolean>;
-    register: (name: string, email: string, phone: string, password: string) => Promise<boolean>;
+    register: (
+        firstName: string,
+        lastName: string,
+        email: string,
+        phone: string,
+        password: string
+    ) => Promise<boolean>;
     logout: () => void;
 }
 
@@ -44,11 +51,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }, [user]);
 
     const login = async (email: string, _password: string): Promise<boolean> => {
-        // Simulate login - in production, this would call an API
-        // For demo purposes, we'll just create a user with the email
+
         const mockUser: User = {
             id: Date.now().toString(),
-            name: email.split("@")[0],
+            firstName: email.split("@")[0],
+            lastName: "",
             email,
         };
         setUser(mockUser);
@@ -56,15 +63,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
 
     const register = async (
-        name: string,
+        firstName: string,
+        lastName: string,
         email: string,
         phone: string,
         _password: string
     ): Promise<boolean> => {
-        // Simulate registration - in production, this would call an API
         const newUser: User = {
             id: Date.now().toString(),
-            name,
+            firstName,
+            lastName,
             email,
             phone,
         };

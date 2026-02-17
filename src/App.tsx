@@ -26,13 +26,26 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { useState, useEffect } from "react";
 import { PerfumeLoader } from "@/components/ui/PerfumeLoader";
 
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
+
 const queryClient = new QueryClient();
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+
+  if (!isAuthenticated && location.pathname !== "/") {
+    return <Navigate to="/register" replace />;
+  }
+
+  return <>{children}</>;
+};
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Elegant loading delay to show off the premium loader
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -52,19 +65,22 @@ const App = () => {
               <ScrollToTop />
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/fragrances" element={<Fragrances />} />
-                <Route path="/new" element={<NewArrivals />} />
-                <Route path="/bestsellers" element={<Bestsellers />} />
-                <Route path="/about" element={<About />} />
+
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/product/:id" element={<ProductDetail />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-                <Route path="/refund-policy" element={<RefundPolicy />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
+
+                <Route path="/fragrances" element={<ProtectedRoute><Fragrances /></ProtectedRoute>} />
+                <Route path="/new" element={<ProtectedRoute><NewArrivals /></ProtectedRoute>} />
+                <Route path="/bestsellers" element={<ProtectedRoute><Bestsellers /></ProtectedRoute>} />
+                <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
+                <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+                <Route path="/product/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
+                <Route path="/privacy-policy" element={<ProtectedRoute><PrivacyPolicy /></ProtectedRoute>} />
+                <Route path="/terms-and-conditions" element={<ProtectedRoute><TermsAndConditions /></ProtectedRoute>} />
+                <Route path="/refund-policy" element={<ProtectedRoute><RefundPolicy /></ProtectedRoute>} />
+                <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
+
+                <Route path="*" element={<ProtectedRoute><NotFound /></ProtectedRoute>} />
               </Routes>
               <CartDrawer />
             </BrowserRouter>

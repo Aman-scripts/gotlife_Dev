@@ -14,10 +14,16 @@ import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 
 const registerSchema = z.object({
-    name: z.string().min(2, "Name must be at least 2 characters"),
+    firstName: z.string().min(4, "First name must be at least 4 characters"),
+    lastName: z.string().min(4, "Last name must be at least 4 characters"),
     email: z.string().email("Please enter a valid email address"),
     phone: z.string().min(10, "Please enter a valid phone number"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
+    password: z
+        .string()
+        .min(8, "Password must be at least 8 characters")
+        .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+        .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+        .regex(/[0-9]/, "Password must contain at least one number"),
     confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -45,7 +51,7 @@ const Register = () => {
     const onSubmit = async (data: RegisterFormData) => {
         setIsLoading(true);
         try {
-            const success = await registerUser(data.name, data.email, data.phone, data.password);
+            const success = await registerUser(data.firstName, data.lastName, data.email, data.phone, data.password);
             if (success) {
                 toast({
                     title: "Account created!",
@@ -83,18 +89,33 @@ const Register = () => {
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                        <div className="space-y-2">
-                            <Label htmlFor="name">Full Name</Label>
-                            <Input
-                                id="name"
-                                type="text"
-                                placeholder="John Doe"
-                                {...register("name")}
-                                className="h-12"
-                            />
-                            {errors.name && (
-                                <p className="text-sm text-destructive">{errors.name.message}</p>
-                            )}
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="firstName">First Name</Label>
+                                <Input
+                                    id="firstName"
+                                    type="text"
+                                    placeholder="John"
+                                    {...register("firstName")}
+                                    className="h-12"
+                                />
+                                {errors.firstName && (
+                                    <p className="text-sm text-destructive">{errors.firstName.message}</p>
+                                )}
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="lastName">Last Name</Label>
+                                <Input
+                                    id="lastName"
+                                    type="text"
+                                    placeholder="Doe"
+                                    {...register("lastName")}
+                                    className="h-12"
+                                />
+                                {errors.lastName && (
+                                    <p className="text-sm text-destructive">{errors.lastName.message}</p>
+                                )}
+                            </div>
                         </div>
 
                         <div className="space-y-2">
@@ -210,3 +231,4 @@ const Register = () => {
 };
 
 export default Register;
+
