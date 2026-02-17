@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "types": [
+      "vitest",
       "vitest/globals"
     ],
     "target": "ES2020",

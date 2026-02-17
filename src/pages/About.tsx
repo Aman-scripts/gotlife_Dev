@@ -3,6 +3,7 @@ import { Sparkles, Heart, Clock, Award, Shield, TrendingUp } from "lucide-react"
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactSection } from "@/components/layout/ContactSection";
+import blackAttireImg from "@/assets/products/Mens/GOT BLACK ATTIRE FOR HIM IMAGES/first.png";
 
 const About = () => {
     const highlights = [
@@ -51,9 +52,8 @@ const About = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8 }}
-                    className="py-24 md:py-32 text-center bg-zinc-900 text-white relative overflow-hidden"
+                    className="py-24 md:py-32 text-center bg-black text-white relative overflow-hidden"
                 >
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
                     <div className="container relative z-10">
                         <span className="text-xs uppercase tracking-[0.3em] text-zinc-400 mb-4 block">About GOTLIFE</span>
                         <h1 className="font-serif text-4xl md:text-6xl tracking-tight mb-6">More Than a Company — It's a Mindset</h1>
@@ -92,9 +92,9 @@ const About = () => {
                                 className="relative aspect-[4/5] bg-zinc-100 overflow-hidden"
                             >
                                 <img
-                                    src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80"
-                                    alt="GOT Fragrance"
-                                    className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-1000"
+                                    src={blackAttireImg}
+                                    alt="GOT Black Attire"
+                                    className="object-contain w-full h-full bg-white hover:scale-105 transition-all duration-1000"
                                 />
                                 <div className="absolute inset-0 border-[20px] border-white/10 m-4 pointer-events-none"></div>
                             </motion.div>

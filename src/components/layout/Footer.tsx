@@ -17,8 +17,8 @@ export const Footer = () => {
       <div className="container mx-auto py-10 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           {/* Brand Section */}
-          <div className="md:col-span-5">
-            <Logo showTextOnMobile={true} />
+          <div className="md:col-span-5 flex flex-col items-center md:items-start text-center md:text-left">
+            <Logo className="justify-center md:justify-start" />
             <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
               GOT – “Guardian of Temptation”. A contemporary fragrance house crafting timeless scents that blend artistry with modern sensibilities.
             </p>
@@ -26,7 +26,7 @@ export const Footer = () => {
               href="https://instagram.com/gotlifeofficial"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+              className="inline-flex items-center space-x-2 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 justify-center md:justify-start"
             >
               <Instagram className="h-4 w-4" />
               <span className="uppercase tracking-[0.15em] text-xs">
