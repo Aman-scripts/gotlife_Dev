@@ -12,6 +12,10 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [react()],
+  test: {
+    globals: true,
+    environment: "jsdom",
+  },
   assetsInclude: ["**/*.JPG", "**/*.png"],
   resolve: {
     alias: {

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Sparkles, Heart, Clock, Award, Shield, Leaf, Target, Eye, TrendingUp } from "lucide-react";
+import { Sparkles, Heart, Clock, Award, Shield, TrendingUp } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactSection } from "@/components/layout/ContactSection";
@@ -46,7 +46,7 @@ const About = () => {
             <Header />
 
             <main className="flex-1">
-                {/* Hero Section */}
+                {/* Hero  Section*/}
                 <motion.section
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -120,20 +120,23 @@ const About = () => {
                         </motion.div>
 
                         <div className="grid md:grid-cols-3 gap-8">
-                            {highlights.map((item, index) => (
-                                <motion.div
-                                    key={item.title}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    className="p-8 bg-white border border-border hover:shadow-xl transition-shadow duration-500"
-                                >
-                                    <item.icon className="h-8 w-8 mb-6 mx-auto text-zinc-400" />
-                                    <h3 className="font-serif text-lg mb-3 uppercase tracking-wider">{item.title}</h3>
-                                    <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
-                                </motion.div>
-                            ))}
+                            {highlights.map((item, index) => {
+                                const Icon = item.icon;
+                                return (
+                                    <motion.div
+                                        key={item.title}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                                        className="p-8 bg-white border border-border hover:shadow-xl transition-shadow duration-500"
+                                    >
+                                        <Icon className="h-8 w-8 mb-6 mx-auto text-zinc-400" />
+                                        <h3 className="font-serif text-lg mb-3 uppercase tracking-wider">{item.title}</h3>
+                                        <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
+                                    </motion.div>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
@@ -165,17 +168,20 @@ const About = () => {
                                 className="space-y-8"
                             >
                                 <h2 className="font-serif text-2xl md:text-3xl mb-6">Our Promise</h2>
-                                {promises.map((promise) => (
-                                    <div key={promise.title} className="flex gap-4">
-                                        <div className="mt-1">
-                                            <promise.icon className="h-5 w-5 text-zinc-400" />
+                                {promises.map((promise) => {
+                                    const Icon = promise.icon;
+                                    return (
+                                        <div key={promise.title} className="flex gap-4">
+                                            <div className="mt-1">
+                                                <Icon className="h-5 w-5 text-zinc-400" />
+                                            </div>
+                                            <div>
+                                                <h3 className="font-medium text-sm mb-1">{promise.title}</h3>
+                                                <p className="text-xs text-muted-foreground leading-relaxed">{promise.description}</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h3 className="font-medium text-sm mb-1">{promise.title}</h3>
-                                            <p className="text-xs text-muted-foreground leading-relaxed">{promise.description}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </motion.div>
                         </div>
                     </div>
