@@ -1,191 +1,94 @@
-import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { SlidersHorizontal, ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactSection } from "@/components/layout/ContactSection";
 import { ProductGrid } from "@/components/product/ProductGrid";
-import { FilterDrawer } from "@/components/ui/FilterDrawer";
-import { products, filterOptions } from "@/data/products";
-
-type SortOption = "newest" | "price-asc" | "price-desc";
+import { products } from "@/data/products";
 
 const Index = () => {
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>(
-    {}
-  );
-  const [sortOpen, setSortOpen] = useState(false);
-  const [currentSort, setCurrentSort] = useState<SortOption>("newest");
-
-  const handleFilterChange = (section: string, value: string) => {
-    setActiveFilters((prev) => {
-      const current = prev[section] || [];
-      const updated = current.includes(value)
-        ? current.filter((v) => v !== value)
-        : [...current, value];
-      return { ...prev, [section]: updated };
-    });
-  };
-
-  const clearFilters = () => {
-    setActiveFilters({});
-  };
-
-  const sortOptions: { label: string; value: SortOption }[] = [
-    { label: "Newest", value: "newest" },
-    { label: "Price: Low to High", value: "price-asc" },
-    { label: "Price: High to Low", value: "price-desc" },
-  ];
-
-  const filteredAndSortedProducts = useMemo(() => {
-    let result = [...products];
-
-    // Apply category filter
-    const categoryFilters = activeFilters["Category"] || [];
-    if (categoryFilters.length > 0 && !categoryFilters.includes("all")) {
-      result = result.filter((p) => categoryFilters.includes(p.category));
-    }
-
-    // Apply concentration filter
-    const concentrationFilters = activeFilters["Concentration"] || [];
-    if (concentrationFilters.length > 0 && !concentrationFilters.includes("all")) {
-      result = result.filter((p) => {
-        const concentrationMap: Record<string, string> = {
-          parfum: "Parfum",
-          edp: "Eau de Parfum",
-        };
-        return concentrationFilters.some(
-          (filter) => concentrationMap[filter] === p.concentration
-        );
-      });
-    }
-
-    // Apply sorting
-    switch (currentSort) {
-      case "price-asc":
-        result.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        result.sort((a, b) => b.price - a.price);
-        break;
-      case "newest":
-      default:
-        result.sort((a, b) => {
-          if (a.tag === "new" && b.tag !== "new") return -1;
-          if (a.tag !== "new" && b.tag === "new") return 1;
-          return b.id.localeCompare(a.id);
-        });
-        break;
-    }
-
-    return result;
-  }, [activeFilters, currentSort]);
-
-  const handleSort = (value: SortOption) => {
-    setCurrentSort(value);
-    setSortOpen(false);
-  };
-
-  const currentSortLabel = sortOptions.find((o) => o.value === currentSort)?.label;
+  // Show a curated selection for the home page (first 8 products)
+  const featuredProducts = products.slice(0, 8);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header />
 
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Dynamic Hero Section */}
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="py-20 md:py-28 text-center bg-zinc-900 text-white"
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden bg-zinc-950 text-white"
         >
-          <div className="container">
-            <span className="text-xs uppercase tracking-[0.3em] text-zinc-400 mb-4 block">Premium Collection</span>
-            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-wide mb-6">The Collection</h1>
-            <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto leading-relaxed">
-              Discover our curated collection of artisanal fragrances.
-              Each scent is a journey — crafted with rare ingredients
-              and timeless elegance.
-            </p>
+          <div className="absolute inset-0 z-0 opacity-40">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-700 via-zinc-900 to-black" />
           </div>
+
+          <div className="container relative z-10 px-6">
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 1 }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-zinc-500 mb-4 md:mb-6 block font-medium">Fine Fragrance House</span>
+              <h1 className="font-serif text-4xl md:text-7xl lg:text-8xl tracking-[0.05em] mb-6 md:mb-8 leading-[1.2] md:leading-[1.1]">
+                Guardian of <br />
+                <span className="italic">Temptation</span>
+              </h1>
+              <p className="text-xs md:text-base text-zinc-400 max-w-sm md:max-w-lg mx-auto leading-relaxed font-light tracking-wide px-4 md:px-0">
+                A contemporary fragrance house crafting timeless scents
+                that blend artisanal heritage with modern sensibilities.
+              </p>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
+          >
+            <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/40" />
+          </motion.div>
         </motion.section>
 
-        {/* Filter Bar */}
-        <section>
-          <div className="container py-4">
-            <div className="flex items-center justify-between">
-              {/* Filter Button */}
-              <button
-                onClick={() => setIsFilterOpen(true)}
-                className="flex items-center space-x-2 text-xs uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors duration-300"
+        {/* Featured Collection Section */}
+        <section className="py-16 md:py-32 bg-[#fafafa]">
+          <div className="container px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12 md:mb-20"
+            >
+              <span className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3 md:mb-4 block font-medium uppercase">Selection Excellence</span>
+              <h2 className="font-serif text-3xl md:text-5xl tracking-wide">Featured Collection</h2>
+              <div className="w-8 md:w-12 h-px bg-black/10 mx-auto mt-6 md:mt-8" />
+            </motion.div>
+
+            <ProductGrid products={featuredProducts} columns={4} />
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="mt-16 md:mt-24 text-center"
+            >
+              <Link
+                to="/fragrances"
+                className="group relative inline-flex flex-col items-center pt-2 md:pt-4"
               >
-                <SlidersHorizontal className="h-4 w-4" />
-                <span>Filter</span>
-                {Object.values(activeFilters).flat().length > 0 && (
-                  <span className="ml-2 px-2 py-0.5 bg-primary text-primary-foreground text-[10px]">
-                    {Object.values(activeFilters).flat().length}
-                  </span>
-                )}
-              </button>
-
-              {/* Sort Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() => setSortOpen(!sortOpen)}
-                  className="flex items-center space-x-2 text-xs uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors duration-300"
-                >
-                  <span>{currentSortLabel}</span>
-                  <ChevronDown
-                    className={`h-3 w-3 transition-transform duration-300 ${sortOpen ? "rotate-180" : ""
-                      }`}
-                  />
-                </button>
-
-                {sortOpen && (
-                  <>
-                    <div
-                      className="fixed inset-0 z-40"
-                      onClick={() => setSortOpen(false)}
-                    />
-                    <div className="absolute right-0 top-full mt-2 w-48 bg-background border border-border z-50 py-2">
-                      {sortOptions.map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => handleSort(option.value)}
-                          className={`block w-full text-left px-4 py-2 text-sm transition-colors duration-200 ${currentSort === option.value
-                            ? "text-foreground bg-secondary"
-                            : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-                            }`}
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Product Grid */}
-        <section className="py-12 md:py-16">
-          <div className="container">
-            {filteredAndSortedProducts.length > 0 ? (
-              <ProductGrid products={filteredAndSortedProducts} columns={4} />
-            ) : (
-              <div className="text-center py-16">
-                <p className="text-muted-foreground mb-4">No products match your filters</p>
-                <button
-                  onClick={clearFilters}
-                  className="btn-outline"
-                >
-                  Clear Filters
-                </button>
-              </div>
-            )}
+                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium mb-2 transition-colors duration-300 group-hover:text-black/60">
+                  Explore The Complete Universe
+                </span>
+                <div className="w-6 md:w-8 h-px bg-black transition-all duration-500 group-hover:w-24" />
+              </Link>
+            </motion.div>
           </div>
         </section>
 
@@ -193,16 +96,6 @@ const Index = () => {
       </main>
 
       <Footer />
-
-      {/* Filter Drawer */}
-      <FilterDrawer
-        isOpen={isFilterOpen}
-        onClose={() => setIsFilterOpen(false)}
-        filters={filterOptions}
-        activeFilters={activeFilters}
-        onFilterChange={handleFilterChange}
-        onClearFilters={clearFilters}
-      />
     </div>
   );
 };

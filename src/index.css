@@ -146,15 +146,19 @@
   }
 
   .product-card-image {
-    @apply overflow-hidden bg-background-subtle;
+    @apply overflow-hidden bg-background-subtle border border-border/40 transition-all duration-500 ease-in-out;
   }
 
   .product-card-image img {
     @apply transition-transform duration-700 ease-out;
   }
 
+  .product-card:hover .product-card-image {
+    @apply border-border/80 shadow-md;
+  }
+
   .product-card:hover .product-card-image img {
-    @apply scale-105;
+    @apply scale-110;
   }
 
   /* Button Variants */
@@ -182,11 +186,15 @@
 
   /* Tag Styles */
   .tag-new {
-    @apply text-[10px] uppercase tracking-[0.15em] text-accent-foreground bg-accent px-2 py-1;
+    @apply text-[9px] font-medium uppercase tracking-[0.2em] text-white bg-black px-2.5 py-1 backdrop-blur-sm bg-opacity-90;
+  }
+
+  .tag-bestseller {
+    @apply text-[9px] font-medium uppercase tracking-[0.2em] text-black bg-white px-2.5 py-1 border border-black/10 backdrop-blur-sm bg-opacity-90;
   }
 
   .tag-sold-out {
-    @apply text-[10px] uppercase tracking-[0.15em] text-muted-foreground bg-muted px-2 py-1;
+    @apply text-[9px] font-medium uppercase tracking-[0.2em] text-muted-foreground bg-muted/80 px-2.5 py-1;
   }
 }
 
