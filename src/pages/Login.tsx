@@ -63,11 +63,9 @@ const Login = () => {
             const result = await login(data.email, data.password);
             if (result.success) {
                 setEmail(data.email);
-                setStep("otp");
-                setCountdown(60);
                 toast({
-                    title: "OTP Sent!",
-                    description: "Check your email for the verification code.",
+                    title: "Success",
+                    description: result.message,
                 });
             } else {
                 toast({
@@ -127,8 +125,8 @@ const Login = () => {
                 setCountdown(60);
                 setOtp("");
                 toast({
-                    title: "OTP Resent",
-                    description: "A new verification code has been sent to your email.",
+                    title: "Success",
+                    description: result.message,
                 });
             } else {
                 toast({
@@ -344,8 +342,8 @@ const Login = () => {
                                         >
                                             <RefreshCw
                                                 className={`h-3.5 w-3.5 ${isResending
-                                                        ? "animate-spin"
-                                                        : ""
+                                                    ? "animate-spin"
+                                                    : ""
                                                     }`}
                                             />
                                             {isResending

@@ -30,7 +30,7 @@ const VerifyOTP = () => {
                 const result = await verifyOtp(emailFromUrl, otpValue);
                 if (result.success) {
                     toast({
-                        title: "Welcome!",
+                        title: "Success",
                         description: "You have been successfully verified.",
                     });
                     navigate("/");
