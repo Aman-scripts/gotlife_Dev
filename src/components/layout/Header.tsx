@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
+import { User, ShoppingBag, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
@@ -53,16 +53,10 @@ export const Header = () => {
 
             {/* Icons - Right */}
             <div className="flex items-center space-x-4 md:space-x-6">
-              <button
-                aria-label="Search"
-                className="p-2 hover:opacity-60 transition-opacity duration-300"
-              >
-                <Search className="h-4 w-4 md:h-5 md:w-5" />
-              </button>
               {isAuthenticated ? (
                 <div className="hidden md:flex items-center space-x-4">
                   <span className="text-xs text-muted-foreground">
-                    Hi, {user?.name?.split(' ')[0]}
+                    Hi, {user?.firstName}
                   </span>
                   <button
                     onClick={logout}

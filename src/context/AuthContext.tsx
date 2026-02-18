@@ -1,24 +1,26 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { authApi } from "@/lib/api";
 
 export interface User {
     id: string;
     firstName: string;
     lastName: string;
     email: string;
-    phone?: string;
+    role: string;
 }
 
 interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
-    login: (email: string, password: string) => Promise<boolean>;
     register: (
         firstName: string,
         lastName: string,
         email: string,
         phone: string,
         password: string
-    ) => Promise<boolean>;
+    ) => Promise<{ success: boolean; message: string }>;
+    login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
+    verifyOtp: (email: string, otp: string) => Promise<{ success: boolean; message: string }>;
     logout: () => void;
 }
 
@@ -50,38 +52,73 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         }
     }, [user]);
 
-    const login = async (email: string, _password: string): Promise<boolean> => {
-
-        const mockUser: User = {
-            id: Date.now().toString(),
-            firstName: email.split("@")[0],
-            lastName: "",
-            email,
-        };
-        setUser(mockUser);
-        return true;
-    };
-
     const register = async (
         firstName: string,
         lastName: string,
         email: string,
         phone: string,
-        _password: string
-    ): Promise<boolean> => {
-        const newUser: User = {
-            id: Date.now().toString(),
-            firstName,
-            lastName,
-            email,
-            phone,
-        };
-        setUser(newUser);
-        return true;
+        password: string
+    ): Promise<{ success: boolean; message: string }> => {
+        try {
+            const res = await authApi.register({
+                firstName,
+                lastName,
+                email,
+                password,
+                phoneNumber: phone,
+            });
+            return { success: true, message: res.data.message };
+        } catch (err: any) {
+            const message =
+                err.response?.data?.message || "Something went wrong. Please try again.";
+            return { success: false, message };
+        }
+    };
+
+    const login = async (
+        email: string,
+        password: string
+    ): Promise<{ success: boolean; message: string }> => {
+        try {
+            const res = await authApi.login({ email, password });
+            return { success: true, message: res.data.message };
+        } catch (err: any) {
+            const message =
+                err.response?.data?.message || "Invalid email or password.";
+            return { success: false, message };
+        }
+    };
+
+    const verifyOtp = async (
+        email: string,
+        otp: string
+    ): Promise<{ success: boolean; message: string }> => {
+        try {
+            const res = await authApi.verify({ email, otp });
+            const { token, user: userData } = res.data.data!;
+
+            localStorage.setItem("gotlife-token", token);
+
+            const loggedInUser: User = {
+                id: userData._id,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                email: userData.email,
+                role: userData.role,
+            };
+            setUser(loggedInUser);
+            return { success: true, message: "Verified successfully" };
+        } catch (err: any) {
+            const message =
+                err.response?.data?.message || "OTP verification failed.";
+            return { success: false, message };
+        }
     };
 
     const logout = () => {
         setUser(null);
+        localStorage.removeItem("gotlife-token");
+        localStorage.removeItem("gotlife-user");
     };
 
     return (
@@ -89,8 +126,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             value={{
                 user,
                 isAuthenticated: !!user,
-                login,
                 register,
+                login,
+                verifyOtp,
                 logout,
             }}
         >

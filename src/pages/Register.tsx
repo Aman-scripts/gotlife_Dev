@@ -13,22 +13,34 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 
-const registerSchema = z.object({
-    firstName: z.string().min(4, "First name must be at least 4 characters"),
-    lastName: z.string().min(4, "Last name must be at least 4 characters"),
-    email: z.string().email("Please enter a valid email address"),
-    phone: z.string().min(10, "Please enter a valid phone number"),
-    password: z
-        .string()
-        .min(8, "Password must be at least 8 characters")
-        .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-        .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-        .regex(/[0-9]/, "Password must contain at least one number"),
-    confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-});
+const registerSchema = z
+    .object({
+        firstName: z
+            .string()
+            .min(2, "First name must be at least 2 characters"),
+        lastName: z
+            .string()
+            .min(2, "Last name must be at least 2 characters"),
+        email: z.string().email("Please enter a valid email address"),
+        phone: z.string().min(10, "Please enter a valid phone number"),
+        password: z
+            .string()
+            .min(8, "Password must be at least 8 characters")
+            .regex(
+                /[A-Z]/,
+                "Password must contain at least one uppercase letter"
+            )
+            .regex(
+                /[a-z]/,
+                "Password must contain at least one lowercase letter"
+            )
+            .regex(/[0-9]/, "Password must contain at least one number"),
+        confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        message: "Passwords don't match",
+        path: ["confirmPassword"],
+    });
 
 type RegisterFormData = z.infer<typeof registerSchema>;
 
@@ -51,13 +63,26 @@ const Register = () => {
     const onSubmit = async (data: RegisterFormData) => {
         setIsLoading(true);
         try {
-            const success = await registerUser(data.firstName, data.lastName, data.email, data.phone, data.password);
-            if (success) {
+            const result = await registerUser(
+                data.firstName,
+                data.lastName,
+                data.email,
+                data.phone,
+                data.password
+            );
+            if (result.success) {
                 toast({
                     title: "Account created!",
-                    description: "Welcome to GotLife. Start exploring our fragrances.",
+                    description:
+                        "Your account has been created. Please sign in to continue.",
                 });
-                navigate("/");
+                navigate("/login");
+            } else {
+                toast({
+                    title: "Registration Failed",
+                    description: result.message,
+                    variant: "destructive",
+                });
             }
         } catch {
             toast({
@@ -82,13 +107,18 @@ const Register = () => {
                     className="w-full max-w-md mx-auto px-6"
                 >
                     <div className="text-center mb-8">
-                        <h1 className="font-serif text-3xl md:text-4xl mb-2">Create Account</h1>
+                        <h1 className="font-serif text-3xl md:text-4xl mb-2">
+                            Create Account
+                        </h1>
                         <p className="text-sm text-muted-foreground">
                             Join GotLife and discover your signature scent
                         </p>
                     </div>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="space-y-5"
+                    >
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="firstName">First Name</Label>
@@ -100,7 +130,9 @@ const Register = () => {
                                     className="h-12"
                                 />
                                 {errors.firstName && (
-                                    <p className="text-sm text-destructive">{errors.firstName.message}</p>
+                                    <p className="text-sm text-destructive">
+                                        {errors.firstName.message}
+                                    </p>
                                 )}
                             </div>
                             <div className="space-y-2">
@@ -113,7 +145,9 @@ const Register = () => {
                                     className="h-12"
                                 />
                                 {errors.lastName && (
-                                    <p className="text-sm text-destructive">{errors.lastName.message}</p>
+                                    <p className="text-sm text-destructive">
+                                        {errors.lastName.message}
+                                    </p>
                                 )}
                             </div>
                         </div>
@@ -128,7 +162,9 @@ const Register = () => {
                                 className="h-12"
                             />
                             {errors.email && (
-                                <p className="text-sm text-destructive">{errors.email.message}</p>
+                                <p className="text-sm text-destructive">
+                                    {errors.email.message}
+                                </p>
                             )}
                         </div>
 
@@ -142,7 +178,9 @@ const Register = () => {
                                 className="h-12"
                             />
                             {errors.phone && (
-                                <p className="text-sm text-destructive">{errors.phone.message}</p>
+                                <p className="text-sm text-destructive">
+                                    {errors.phone.message}
+                                </p>
                             )}
                         </div>
 
@@ -158,7 +196,9 @@ const Register = () => {
                                 />
                                 <button
                                     type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
+                                    onClick={() =>
+                                        setShowPassword(!showPassword)
+                                    }
                                     className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                                 >
                                     {showPassword ? (
@@ -169,23 +209,35 @@ const Register = () => {
                                 </button>
                             </div>
                             {errors.password && (
-                                <p className="text-sm text-destructive">{errors.password.message}</p>
+                                <p className="text-sm text-destructive">
+                                    {errors.password.message}
+                                </p>
                             )}
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="confirmPassword">Confirm Password</Label>
+                            <Label htmlFor="confirmPassword">
+                                Confirm Password
+                            </Label>
                             <div className="relative">
                                 <Input
                                     id="confirmPassword"
-                                    type={showConfirmPassword ? "text" : "password"}
+                                    type={
+                                        showConfirmPassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     placeholder="••••••••"
                                     {...register("confirmPassword")}
                                     className="h-12 pr-12"
                                 />
                                 <button
                                     type="button"
-                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    onClick={() =>
+                                        setShowConfirmPassword(
+                                            !showConfirmPassword
+                                        )
+                                    }
                                     className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                                 >
                                     {showConfirmPassword ? (
@@ -196,7 +248,9 @@ const Register = () => {
                                 </button>
                             </div>
                             {errors.confirmPassword && (
-                                <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+                                <p className="text-sm text-destructive">
+                                    {errors.confirmPassword.message}
+                                </p>
                             )}
                         </div>
 
@@ -207,7 +261,9 @@ const Register = () => {
                             className="w-full"
                             disabled={isLoading}
                         >
-                            {isLoading ? "Creating Account..." : "Create Account"}
+                            {isLoading
+                                ? "Creating Account..."
+                                : "Create Account"}
                         </Button>
                     </form>
 
@@ -231,4 +287,3 @@ const Register = () => {
 };
 
 export default Register;
-

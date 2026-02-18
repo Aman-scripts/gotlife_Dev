@@ -19,6 +19,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import RefundPolicy from "./pages/RefundPolicy";
 import Contact from "./pages/Contact";
+import VerifyOTP from "./pages/VerifyOTP";
 import NotFound from "./pages/NotFound";
 
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
@@ -68,6 +69,7 @@ const App = () => {
 
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/verify" element={<VerifyOTP />} />
 
                 <Route path="/fragrances" element={<ProtectedRoute><Fragrances /></ProtectedRoute>} />
                 <Route path="/new" element={<ProtectedRoute><NewArrivals /></ProtectedRoute>} />

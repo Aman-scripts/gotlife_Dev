@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const api: AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080/api',
+    baseURL: '/api',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -26,12 +26,13 @@ api.interceptors.response.use(
         if (error.response?.status === 401) {
             localStorage.removeItem('gotlife-token');
             localStorage.removeItem('gotlife-user');
-            window.location.href = '/register';
+            window.location.href = '/login';
         }
         return Promise.reject(error);
     }
 );
 
+// Generic HTTP helpers
 export const get = <T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
     return api.get<T>(url, config);
 };
@@ -50,6 +51,42 @@ export const patch = <T>(url: string, data?: any, config?: AxiosRequestConfig): 
 
 export const del = <T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
     return api.delete<T>(url, config);
+};
+
+// ─── Auth API ────────────────────────────────────────────────────────────────
+
+interface ApiResponse<T = any> {
+    success: boolean;
+    message: string;
+    data?: T;
+}
+
+interface VerifyData {
+    token: string;
+    user: {
+        _id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        role: string;
+    };
+}
+
+export const authApi = {
+    register: (data: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        password: string;
+        phoneNumber?: string;
+        address?: string;
+    }) => api.post<ApiResponse>('/auth/register', data),
+
+    login: (data: { email: string; password: string }) =>
+        api.post<ApiResponse>('/auth/login', data),
+
+    verify: (data: { email: string; otp: string }) =>
+        api.post<ApiResponse<VerifyData>>('/auth/verify', data),
 };
 
 export default api;
